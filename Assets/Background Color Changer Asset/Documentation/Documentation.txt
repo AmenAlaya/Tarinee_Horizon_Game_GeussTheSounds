@@ -1,0 +1,13 @@
+It is very simple to set up this asset, just follow the following steps:
+
+1- Go to the Main Camera and in the Camera component, change the Clear Flags to Solid Color.
+
+2- Then, drag the "ChangeBackgroundColorScript" script to the Main Camera.
+
+3- In the component of the script, click on ColorsArray and specify its size and then change the colors.
+
+4- In Time Parameters, adjust the Time To Change Colors (Time to change to the next color) and the TransitionSpeed (Time of the transition between one color and the next) as you like.
+
+5- Press Play button and see the result.
+
+Thank you for getting the asset, I really appreciate it :D.
