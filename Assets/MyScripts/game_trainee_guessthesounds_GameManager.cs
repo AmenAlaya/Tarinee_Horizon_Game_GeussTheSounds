@@ -9,40 +9,104 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     [SerializeField]
     private int _numberOfEllemnts;// Makes sure to hide in the inspector later
-    [SerializeField]
-    private int _indexOfTheRightAnswer; // Makes sure to hide in the inspector later
+
+    public int _indexOfTheRightAnswer; // Makes sure to hide in the inspector later
 
     private List<Sprite> _listOfSpritesInThePhase = new List<Sprite>();
-    private List<AudioClip> _listOfAudioClipsInThePhase = new List<AudioClip>() ;
+    private List<AudioClip> _listOfAudioClipsInThePhase = new List<AudioClip>();
     private List<int> _listOfIndexes = new List<int>();
 
     public GameObject btnPrefab;
     public Transform panel;
 
-    private List<game_trainee_guessthesounds_Cards> _listOfCrads = new List<game_trainee_guessthesounds_Cards>();
+    public float timeBettwenAudioClips = 1, timeBeforeSpawn = 1;
+
+    private AudioSource _audioSource;
+
+    public bool Spawn = true;
+    private bool playSfx = false;
+
+    public Image hidenImg;
+    public Sprite baffel, equationMark;
+
+    public float time;
+    public Image timerImg;
+
+    private bool _timerIsRunning = false;
+    private float _timer;
+    private float _progress;
+
+    private List<GameObject> _lisOfcards = new List<GameObject>();
+
+    private float timeLeft;
+    public float reloadTime;
+
+    public game_trainee_guessthesounds_HidenImage hiden;
+
 
     void Start()
-    {       
-        Spawn_Manager();
+    {
+        timeLeft = reloadTime;
+        _timer = time;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
+        if (Spawn)
+        {
+            Fill_Lists();
+            StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
+            Spawn = false;
+        }
+        Timer();
+    }
 
+    IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
+    {
+        _timerIsRunning = false;
+        hidenImg.color = new Color32(0, 0, 0, 100);
+        hidenImg.sprite = baffel;
+        int NumberOfPhases = _listOfAudioClipsInThePhase.Count;
+        for (int i = 0; i < NumberOfPhases; i++)
+        {
+            int ran = Randomize_Sounds();
+            Play_Sound(ran, timeOfPlaySounds);
+            yield return new WaitForSeconds(timeOfPlaySounds);
+            Stop_Sound(ran);
+        }
+
+        yield return new WaitForSeconds(timeForSpawnImages);
+        _timerIsRunning = true;
+        hidenImg.sprite = equationMark;
+        hidenImg.color = new Color32(255, 255, 255, 100);
+        Spawn_Manager();
+        playSfx = true;
+    }
+
+    void Play_Sound(int index, float time)
+    {
+        _audioSource.PlayOneShot(_listOfAudioClipsInThePhase[index], time);
+    }
+
+    void Stop_Sound(int index)
+    {
+        _audioSource.Stop();
+        _listOfAudioClipsInThePhase.RemoveAt(index);
     }
 
     void Spawn_Manager()
     {
-        Fill_Lists();
         _numberOfEllemnts++;
         for (int i = 0; i < _numberOfEllemnts; i++)
         {
             GameObject newBtn = Instantiate(btnPrefab, panel);
+            _lisOfcards.Add(newBtn);
+            newBtn.GetComponent<game_trainee_guessthesounds_Cards>().Set_Game_Manager(this);
             int randomIndex = Random.Range(0, _listOfSpritesInThePhase.Count);
-            newBtn.GetComponent<game_trainee_guessthesounds_Cards>().mySprite = _listOfSpritesInThePhase[randomIndex];
-            newBtn.GetComponent<game_trainee_guessthesounds_Cards>().myIndex = _listOfIndexes[randomIndex];
+            newBtn.GetComponent<game_trainee_guessthesounds_Cards>().Set_Me(_listOfSpritesInThePhase[randomIndex], _listOfIndexes[randomIndex]);
             _listOfIndexes.RemoveAt(randomIndex);
-            _listOfSpritesInThePhase.RemoveAt(randomIndex);           
+            _listOfSpritesInThePhase.RemoveAt(randomIndex);
         }
     }
 
@@ -86,16 +150,84 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         return ran;
     }
 
-    public void Answer_Btn()
+    int Randomize_Sounds()
     {
-        if(btnPrefab.GetComponent<game_trainee_guessthesounds_Cards>().myIndex == _indexOfTheRightAnswer)
+        int randSound = Random.Range(0, _listOfAudioClipsInThePhase.Count);
+        return randSound;
+    }
+
+    public void Answer_Btn(int index)
+    {
+        if (index == _indexOfTheRightAnswer)
         {
-            Debug.Log("GoodJob !");
+            StartCoroutine(hiden.UnhideCard());
         }
         else
         {
-            Debug.Log("You Fail");
+            StartCoroutine(hiden.UnhideCard());
         }
+
+        StartCoroutine(Clear_Lists());
+    }
+
+    IEnumerator Clear_Lists()
+    {
+        yield return new WaitForSeconds(.5f);       
+        for (int i = 0; i < _lisOfcards.Count; i++)
+        {
+            Destroy(_lisOfcards[i]);
+        }
+        _numberOfEllemnts = 2;
+        //_indexOfTheRightAnswer++;
+        _lisOfcards.Clear();
+        _listOfIndexes.Clear();       
+        Spawn = true;
+        
+    }
+
+    public void Play_Rigth_Sound()
+    {
+        if (playSfx)
+        {
+            _audioSource.PlayOneShot(listOfAudioClips[_indexOfTheRightAnswer]);
+            playSfx = false;
+        }
+
+        timeLeft -= Time.deltaTime;
+        if (timeLeft < reloadTime)
+        {
+            playSfx = true;
+
+            timeLeft = reloadTime;
+        }
+
+    }
+
+
+
+    void Timer()
+    {
+        if (_timerIsRunning)
+        {
+            if (_timer > 0)
+            {
+                _timer -= Time.deltaTime;
+                Timer_Fill_Amont();
+
+
+            }
+            else
+            {
+                _timer = 0;
+                _timerIsRunning = false;
+            }
+        }
+    }
+
+    void Timer_Fill_Amont()
+    {
+        _progress = _timer / time;
+        timerImg.fillAmount = _progress;
     }
 
 }
