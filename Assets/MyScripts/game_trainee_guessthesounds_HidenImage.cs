@@ -15,12 +15,13 @@ public class game_trainee_guessthesounds_HidenImage : MonoBehaviour
 
         while (transform.eulerAngles.y <= 178f)
         {
-            transform.Rotate(0, 300 * Time.deltaTime, 0);
+            transform.Rotate(0, 180 * Time.deltaTime, 0);
 
             _mySprite = gameMan.listOfSprites[gameMan._indexOfTheRightAnswer];
             if (transform.eulerAngles.y > 90)
             {
                 HidenImage.sprite = _mySprite;
+                HidenImage.color = new Color32(255, 255, 255, 255);
             }
             yield return new WaitForEndOfFrame();
         }
@@ -30,13 +31,14 @@ public class game_trainee_guessthesounds_HidenImage : MonoBehaviour
     {
         while (transform.eulerAngles.y >= 2)
         {
-            transform.Rotate(0, -300 * Time.deltaTime, 0);
+            transform.Rotate(0, -180 * Time.deltaTime, 0);
 
             _mySprite = gameMan.baffel;
 
-            if (transform.eulerAngles.y > 90)
+            if (transform.eulerAngles.y < 90)
             {
                 HidenImage.sprite = _mySprite;
+                HidenImage.color = new Color32(0, 0, 0, 100);
             }
             yield return new WaitForEndOfFrame();
         }

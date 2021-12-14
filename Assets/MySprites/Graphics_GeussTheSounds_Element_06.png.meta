@@ -1,31 +1,40 @@
 fileFormatVersion: 2
-guid: 9cbc1efd80f7f52468bb6bc0b24aed87
+guid: 0ec187a99997c204ea4f0ea1dc08d9a0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6786386314190967171
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_0
+      213: -4428695350696477455
+    second: Graphics_GeussTheSounds_Element_06_0
   - first:
-      213: -424301302676219494
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_1
+      213: 4849556002940552234
+    second: Graphics_GeussTheSounds_Element_06_1
   - first:
-      213: -8425848294948569005
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_0
+      213: 2573344958047526246
+    second: Graphics_GeussTheSounds_Element_06_2
   - first:
-      213: -4534726394447777370
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_1
+      213: 5474404989832967768
+    second: Graphics_GeussTheSounds_Element_06_3
   - first:
-      213: -7257754031668184092
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_2
+      213: 7462978173944702250
+    second: Graphics_GeussTheSounds_Element_06_4
   - first:
-      213: 833864381677195570
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_3
+      213: 7025758533914620501
+    second: Graphics_GeussTheSounds_Element_06_5
   - first:
-      213: 73576321769444190
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_2
+      213: -2931121334640020941
+    second: Graphics_GeussTheSounds_Element_06_6
   - first:
-      213: -2827371151594467512
-    second: Graphics_GeussTheSounds_Elements_SpriteSheet_01_3
+      213: -6334168716260192370
+    second: Graphics_GeussTheSounds_Element_06_7
+  - first:
+      213: 4634864748338470091
+    second: Graphics_GeussTheSounds_Element_06_8
+  - first:
+      213: -944940194500330122
+    second: Graphics_GeussTheSounds_Element_06_9
+  - first:
+      213: 5792779141100862873
+    second: Graphics_GeussTheSounds_Element_06_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -135,64 +144,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Graphics_GeussTheSounds_Elements_SpriteSheet_01_0
-      rect:
-        serializedVersion: 2
-        x: 344
-        y: 1279
-        width: 903
-        height: 570
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 35082482e9f511b80800000000000000
-      internalID: -8425848294948569005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Graphics_GeussTheSounds_Elements_SpriteSheet_01_1
-      rect:
-        serializedVersion: 2
-        x: 1123
-        y: 0
-        width: 626
-        height: 1290
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a13a59ce5a6111c0800000000000000
-      internalID: -4534726394447777370
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Graphics_GeussTheSounds_Elements_SpriteSheet_01_3
+      name: Graphics_GeussTheSounds_Element_06_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 747
-        width: 417
-        height: 456
+        y: 1007
+        width: 422
+        height: 272
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84f460deae823c8d0800000000000000
-      internalID: -2827371151594467512
+      spriteID: 1fcff43fa0d1a82c0800000000000000
+      internalID: -4428695350696477455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Graphics_GeussTheSounds_Element_06_1
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 725
+        width: 460
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2482a99d751d4340800000000000000
+      internalID: 4849556002940552234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Graphics_GeussTheSounds_Element_06_6
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 0
+        width: 443
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33276370da09257d0800000000000000
+      internalID: -2931121334640020941
       vertices: []
       indices: 
       edges: []

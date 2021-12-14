@@ -606,8 +606,8 @@ MonoBehaviour:
   - {r: 0.08235294, g: 0.5647059, b: 0.5882353, a: 1}
   - {r: 0.25882354, g: 0.67058825, b: 0.54901963, a: 1}
   - {r: 0.9921569, g: 0.8117648, b: 0.3372549, a: 1}
-  - {r: 0.90196085, g: 0.86274517, b: 0.81568635, a: 1}
-  - {r: 0.9843138, g: 0.9490197, b: 0.9294118, a: 1}
+  - {r: 0, g: 0.62352943, b: 0.8000001, a: 1}
+  - {r: 0, g: 0.40000004, b: 0.6901961, a: 1}
   TimeToChangeColors: 2
   TransitionSpeed: 1
 --- !u!20 &519420031
@@ -744,7 +744,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 456e829b58b96aa4cb2d4050766c9803, type: 3}
   - {fileID: 8300000, guid: 1ed45f05ae9a2af49a429b3228693880, type: 3}
   _numberOfEllemnts: 2
-  _indexOfTheRightAnswer: 12
+  _indexOfTheRightAnswer: 2
   btnPrefab: {fileID: 6782287872295046258, guid: 1e213a95dc8523245ac3273ab7c1919b,
     type: 3}
   panel: {fileID: 156470008}

@@ -46,24 +46,26 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     void Start()
     {
-        timeLeft = reloadTime;
+
         _timer = time;
         _audioSource = GetComponent<AudioSource>();
-    }
-
-    void Update()
-    {
         if (Spawn)
         {
             Fill_Lists();
             StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
             Spawn = false;
         }
+    }
+
+    void Update()
+    {
+
         Timer();
     }
 
     IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
     {
+        playSfx = false;
         _timerIsRunning = false;
         hidenImg.color = new Color32(0, 0, 0, 100);
         hidenImg.sprite = baffel;
@@ -172,17 +174,26 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     IEnumerator Clear_Lists()
     {
-        yield return new WaitForSeconds(.5f);       
         for (int i = 0; i < _lisOfcards.Count; i++)
         {
             Destroy(_lisOfcards[i]);
         }
+        StartCoroutine(hiden.UnhideCard());
+        yield return new WaitForSeconds(1);
+        StartCoroutine(hiden.Hide_Card_Coroutine());
+        yield return new WaitForSeconds(1);
         _numberOfEllemnts = 2;
-        //_indexOfTheRightAnswer++;
+        _indexOfTheRightAnswer++;
         _lisOfcards.Clear();
-        _listOfIndexes.Clear();       
+        _listOfIndexes.Clear();
         Spawn = true;
-        
+        if (Spawn)
+        {
+            Fill_Lists();
+            StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
+            Spawn = false;
+        }
+
     }
 
     public void Play_Rigth_Sound()
@@ -191,19 +202,27 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         {
             _audioSource.PlayOneShot(listOfAudioClips[_indexOfTheRightAnswer]);
             playSfx = false;
+            timeLeft = 0;
+            StartCoroutine(CountTimer());
         }
 
-        timeLeft -= Time.deltaTime;
-        if (timeLeft < reloadTime)
-        {
-            playSfx = true;
 
-            timeLeft = reloadTime;
-        }
 
     }
+    IEnumerator CountTimer()
+    {
+        while (!playSfx)
+        {
+            yield return new WaitForSeconds(1f);
 
+            timeLeft++;
+            // display timer count
+            if (timeLeft > reloadTime)
+                playSfx = true;
 
+            Debug.Log(timeLeft);
+        }
+    }
 
     void Timer()
     {
