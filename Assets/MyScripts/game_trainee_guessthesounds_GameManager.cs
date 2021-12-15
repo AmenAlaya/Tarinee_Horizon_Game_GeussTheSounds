@@ -64,9 +64,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     }
 
     IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
-    {
-        playSfx = false;
-        _timerIsRunning = false;
+    {       
         hidenImg.color = new Color32(0, 0, 0, 100);
         hidenImg.sprite = baffel;
         int NumberOfPhases = _listOfAudioClipsInThePhase.Count;
@@ -169,6 +167,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             StartCoroutine(hiden.UnhideCard());
         }
 
+        playSfx = false;
+        _timerIsRunning = false;
+
         StartCoroutine(Clear_Lists());
     }
 
@@ -216,11 +217,10 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             timeLeft++;
-            // display timer count
+
             if (timeLeft > reloadTime)
                 playSfx = true;
 
-            Debug.Log(timeLeft);
         }
     }
 

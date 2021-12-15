@@ -347,6 +347,21 @@ PrefabInstance:
       propertyPath: levelMapGameName
       value: game_trainee_guessthesounds
       objectReference: {fileID: 0}
+    - target: {fileID: 1055586838022448380, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ea75fc7c6865e142a55798e4d2628cf, type: 3}
+    - target: {fileID: 1055586838022448380, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055586838022448380, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536,
+        type: 3}
+      propertyPath: Priority
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4563775414705749542, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -457,6 +472,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4897692812534329504, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4906204977386908384, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536,
         type: 3}
       propertyPath: m_IsActive
@@ -466,6 +486,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173345444358625483, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc9a30f6cfa46a4b970f18cbdc5b536, type: 3}
@@ -712,39 +737,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfSprites:
-  - {fileID: -8928864541428472833, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: -5267040858494430880, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: 569455487163865757, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
   - {fileID: 4591414501033328306, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
   - {fileID: 6921259721119015625, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: 8338524496610430784, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: -6441161846360333039, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: 6908080893896578956, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: 6055257337211787310, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: -1285100507624770081, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
   - {fileID: 7390159512311515883, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: 1362784247632203487, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
-  - {fileID: 6331647802604158384, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: -6118776077418014572, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
   - {fileID: -6775292526664099366, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: -1285100507624770081, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: -5267040858494430880, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
   - {fileID: 2263963254943444357, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: 6331647802604158384, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: 8338524496610430784, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: 6331647802604158384, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: 1362784247632203487, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
+  - {fileID: 6055257337211787310, guid: 34c15bcc887e03d4084ca53428f295b1, type: 3}
   listOfAudioClips:
-  - {fileID: 8300000, guid: 4d7c8611bb861874292998cf8cd4b547, type: 3}
-  - {fileID: 8300000, guid: d34309be964d391438172e3156f00ddf, type: 3}
-  - {fileID: 8300000, guid: c274f5231efedc1439a65628ab8fe851, type: 3}
-  - {fileID: 8300000, guid: 82799a548766db94cb2b397c7a96b7f5, type: 3}
-  - {fileID: 8300000, guid: acfdb80be9d6a71419673f3afe32a1b6, type: 3}
-  - {fileID: 8300000, guid: f3efbe339ca78e24483eac3359c7ff3d, type: 3}
-  - {fileID: 8300000, guid: e54b929854f6a7f43888f41f02491d25, type: 3}
-  - {fileID: 8300000, guid: da36bac6e75ac864080588bc5fc71bbd, type: 3}
-  - {fileID: 8300000, guid: a95153b05634b6a45a080bb40709ad8f, type: 3}
-  - {fileID: 8300000, guid: be9280614fa5df141b5ab6cb2f61941e, type: 3}
-  - {fileID: 8300000, guid: 6d534a2ecc9a49646a3a773fc1bb745c, type: 3}
-  - {fileID: 8300000, guid: 7b89e51dfdff5b249bd0fdbdc0e9707d, type: 3}
-  - {fileID: 8300000, guid: b1ece610ad25bce41bd13df1df90f957, type: 3}
-  - {fileID: 8300000, guid: 456e829b58b96aa4cb2d4050766c9803, type: 3}
-  - {fileID: 8300000, guid: 1ed45f05ae9a2af49a429b3228693880, type: 3}
-  _numberOfEllemnts: 2
-  _indexOfTheRightAnswer: 2
+  - {fileID: 8300000, guid: 2adb89136c721b94599784983e97fa93, type: 3}
+  - {fileID: 8300000, guid: 33d19e0b670e7b647ad968c058c2990f, type: 3}
+  - {fileID: 8300000, guid: 5d72c2eb6061c6b4e9b4c2bf29d27f29, type: 3}
+  - {fileID: 8300000, guid: 9d950cb53504ce24b88a5cb6650ebe1d, type: 3}
+  - {fileID: 8300000, guid: dfa1b9817ec9f464e84d0e94c32df2cc, type: 3}
+  - {fileID: 8300000, guid: 92006794f2ace274f91d20826159d52f, type: 3}
+  - {fileID: 8300000, guid: b17ad795b9ee1b64f9e937341210cb02, type: 3}
+  - {fileID: 8300000, guid: 6169bbcf79104e8429863cbcf6954349, type: 3}
+  - {fileID: 8300000, guid: 43c18cbb82d5b6e419d311ebd207b5ad, type: 3}
+  - {fileID: 8300000, guid: 75d6d0faa8affa34996e0f8bb49c8934, type: 3}
+  - {fileID: 8300000, guid: 85eb13917736aed4a9da19ccd53af03c, type: 3}
+  - {fileID: 8300000, guid: 51a6449b186edbe4bab00d47984ce531, type: 3}
+  - {fileID: 8300000, guid: 3790b3200bfa0824282697d922ee890b, type: 3}
+  _numberOfEllemnts: 0
+  _indexOfTheRightAnswer: 0
   btnPrefab: {fileID: 6782287872295046258, guid: 1e213a95dc8523245ac3273ab7c1919b,
     type: 3}
   panel: {fileID: 156470008}
@@ -757,7 +778,7 @@ MonoBehaviour:
     type: 3}
   time: 60
   timerImg: {fileID: 1214773046}
-  reloadTime: 5
+  reloadTime: 2.5
   hiden: {fileID: 1588197468}
 --- !u!82 &1119289478
 AudioSource:

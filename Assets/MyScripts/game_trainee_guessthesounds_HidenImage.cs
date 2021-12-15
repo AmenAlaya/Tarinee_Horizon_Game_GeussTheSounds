@@ -29,7 +29,7 @@ public class game_trainee_guessthesounds_HidenImage : MonoBehaviour
 
     public IEnumerator Hide_Card_Coroutine()
     {
-        while (transform.eulerAngles.y >= 2)
+        while (transform.eulerAngles.y >2)
         {
             transform.Rotate(0, -180 * Time.deltaTime, 0);
 
