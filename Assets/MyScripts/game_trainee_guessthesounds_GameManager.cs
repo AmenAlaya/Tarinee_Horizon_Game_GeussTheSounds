@@ -7,10 +7,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     public List<Sprite> listOfSprites;
     public List<AudioClip> listOfAudioClips;
 
-    [SerializeField]
-    private int _numberOfEllemnts;// Makes sure to hide in the inspector later
-
-    public int _indexOfTheRightAnswer; // Makes sure to hide in the inspector later
+    private int _numberOfEllemnts;
+    [HideInInspector]
+    public int _indexOfTheRightAnswer;
 
     private List<Sprite> _listOfSpritesInThePhase = new List<Sprite>();
     private List<AudioClip> _listOfAudioClipsInThePhase = new List<AudioClip>();
@@ -43,10 +42,28 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     public game_trainee_guessthesounds_HidenImage hiden;
 
+    public GameObject answerPanel;
+    public Image answerImg;
+
+    public Sprite wrong, right;
+    public AudioClip wrongSfx, rightSfx;
+
+    private int NumberOfEmelentsInLevel;
+    private int _health = 2;
+
+    public Game_Over_Manager gameOverManager;
+
+    private bool _endGame = false;
+
+    private int _lvlCounter = 0;
+    public int numberOfSoundsInTheLvl;
+
 
     void Start()
     {
-
+        _lvlCounter = 0;
+        LevelManager();
+        NumberOfEmelentsInLevel = _numberOfEllemnts;
         _timer = time;
         _audioSource = GetComponent<AudioSource>();
         if (Spawn)
@@ -59,19 +76,19 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     void Update()
     {
-
         Timer();
+
     }
 
     IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
-    {       
+    {
         hidenImg.color = new Color32(0, 0, 0, 100);
         hidenImg.sprite = baffel;
         int NumberOfPhases = _listOfAudioClipsInThePhase.Count;
         for (int i = 0; i < NumberOfPhases; i++)
         {
             int ran = Randomize_Sounds();
-            Play_Sound(ran, timeOfPlaySounds);
+            Play_Sound(ran);
             yield return new WaitForSeconds(timeOfPlaySounds);
             Stop_Sound(ran);
         }
@@ -84,9 +101,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         playSfx = true;
     }
 
-    void Play_Sound(int index, float time)
+    void Play_Sound(int index)
     {
-        _audioSource.PlayOneShot(_listOfAudioClipsInThePhase[index], time);
+        _audioSource.PlayOneShot(_listOfAudioClipsInThePhase[index]);
     }
 
     void Stop_Sound(int index)
@@ -161,16 +178,25 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         if (index == _indexOfTheRightAnswer)
         {
             StartCoroutine(hiden.UnhideCard());
+            answerImg.sprite = right;
+            _audioSource.PlayOneShot(rightSfx);
         }
         else
         {
             StartCoroutine(hiden.UnhideCard());
+            _audioSource.PlayOneShot(wrongSfx);
+            answerImg.sprite = wrong;
+            _health = Health(_health);
+            Debug.Log(_health);
         }
-
+        _lvlCounter++;
+        WinLoseBeBehaviour();
         playSfx = false;
         _timerIsRunning = false;
-
-        StartCoroutine(Clear_Lists());
+        if (!_endGame)
+        {
+            StartCoroutine(Clear_Lists());
+        }
     }
 
     IEnumerator Clear_Lists()
@@ -180,10 +206,13 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             Destroy(_lisOfcards[i]);
         }
         StartCoroutine(hiden.UnhideCard());
+        answerPanel.SetActive(true);
         yield return new WaitForSeconds(1);
         StartCoroutine(hiden.Hide_Card_Coroutine());
         yield return new WaitForSeconds(1);
-        _numberOfEllemnts = 2;
+        answerPanel.SetActive(false);
+        _numberOfEllemnts = NumberOfEmelentsInLevel;
+        timeBettwenAudioClips -= 0.1f;
         _indexOfTheRightAnswer++;
         _lisOfcards.Clear();
         _listOfIndexes.Clear();
@@ -249,4 +278,69 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         timerImg.fillAmount = _progress;
     }
 
+    void LevelManager()
+    {
+        switch (Game_Over_Manager.levelIndex)
+        {
+            case 0:
+                _numberOfEllemnts = 1;
+                _indexOfTheRightAnswer = 0;
+                break;
+
+            case 1:
+                _numberOfEllemnts = 1;
+                _indexOfTheRightAnswer = 6;
+                break;
+            case 2:
+                _numberOfEllemnts = 2;
+                _indexOfTheRightAnswer = 11;
+                break;
+            case 3:
+                _numberOfEllemnts = 2;
+                _indexOfTheRightAnswer = 16;
+                break;
+            case 4:
+                _numberOfEllemnts = 2;
+                _indexOfTheRightAnswer = 21;
+                break;
+            case 5:
+                _numberOfEllemnts = 3;
+                _indexOfTheRightAnswer = 26;
+                break;
+            case 6:
+                _numberOfEllemnts = 3;
+                _indexOfTheRightAnswer = 31;
+                break;
+        }
+    }
+
+    int Health(int health)
+    {
+        int h = health;
+        h--;
+        return h;
+    }
+
+    void WinLoseBeBehaviour()
+    {
+        if (_timer < 0 || _health < 0)
+        {
+            gameOverManager.WinLoseLevelManager(false);
+            _endGame = true;
+        }
+        else
+        {
+            if (_lvlCounter > numberOfSoundsInTheLvl)
+            {
+                gameOverManager.WinLoseLevelManager(true, NumberOfStars(_health));
+                _endGame = true;
+            }
+        }
+    }
+
+    int NumberOfStars(int numHealth)
+    {
+        numHealth++;
+        return numHealth;
+    }
 }

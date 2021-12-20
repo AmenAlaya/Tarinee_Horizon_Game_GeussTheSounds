@@ -1,0 +1,263 @@
+fileFormatVersion: 2
+guid: 0cf1f8e1321ca0f49a184ac9d0857688
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3685727743684714210
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_0
+  - first:
+      213: -3172304546352295650
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_1
+  - first:
+      213: 2643884094516725929
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_2
+  - first:
+      213: 4449388210593497434
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_3
+  - first:
+      213: 6948396206270059297
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_4
+  - first:
+      213: 1490115100692026979
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_5
+  - first:
+      213: 8138568200424050077
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_6
+  - first:
+      213: -1752652886076423859
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_7
+  - first:
+      213: 6304217094688867199
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_8
+  - first:
+      213: -2429267809684179436
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_9
+  - first:
+      213: -6393548115824739289
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_10
+  - first:
+      213: -2131292473381212740
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_11
+  - first:
+      213: -276865415668280210
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_12
+  - first:
+      213: 7893201639265037113
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_13
+  - first:
+      213: -816502207516642783
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_14
+  - first:
+      213: 5871018167071910521
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_15
+  - first:
+      213: 6631698481276212509
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_16
+  - first:
+      213: -4304745325315356445
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_17
+  - first:
+      213: -2872509406659979128
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_18
+  - first:
+      213: -7308955105403911536
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_19
+  - first:
+      213: 2541804057936199796
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_20
+  - first:
+      213: -1155956792907813142
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_21
+  - first:
+      213: -4585398100452221047
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_22
+  - first:
+      213: -470696634318930594
+    second: Graphics_GeussTheSounds_Elements_SpriteSheet_03_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Graphics_GeussTheSounds_Elements_SpriteSheet_03_0
+      rect:
+        serializedVersion: 2
+        x: 1474
+        y: 3185
+        width: 5241
+        height: 1888
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e11eeda152aa9dcc0800000000000000
+      internalID: -3685727743684714210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Graphics_GeussTheSounds_Elements_SpriteSheet_03_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1094
+        width: 7903
+        height: 1920
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e11905b92d5b9f3d0800000000000000
+      internalID: -3172304546352295650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Graphics_GeussTheSounds_Elements_SpriteSheet_03_3
+      rect:
+        serializedVersion: 2
+        x: 3528
+        y: 41
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a518c30f0076fbd30800000000000000
+      internalID: 4449388210593497434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
