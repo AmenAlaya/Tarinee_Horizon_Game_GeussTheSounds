@@ -49,7 +49,8 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     public AudioClip wrongSfx, rightSfx;
 
     private int NumberOfEmelentsInLevel;
-    private int _health = 2;
+    private float _health = 2;
+    private float _maxHealth;
 
     public Game_Over_Manager gameOverManager;
 
@@ -58,11 +59,22 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     private int _lvlCounter = 0;
     public int numberOfSoundsInTheLvl;
 
+    public Image healthImg;
+    private float _healthProgress;
+    public float _progressSpeed;
+
+    private List<int> _ListOfRightIndex = new List<int>();
 
     void Start()
     {
+        _maxHealth = _health;
         _lvlCounter = 0;
-        LevelManager();
+        if (Game_Over_Manager.isLevel)
+            LevelManager();
+        else
+        {
+            _numberOfEllemnts = 1;
+        }
         NumberOfEmelentsInLevel = _numberOfEllemnts;
         _timer = time;
         _audioSource = GetComponent<AudioSource>();
@@ -77,7 +89,31 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     void Update()
     {
         Timer();
+        Health_Progress();
+        if (!Game_Over_Manager.isLevel)
+        {
+            Incrice_The_Number_Of_Element();
+            Clear_List_Of_Right_Indexes();
+        }
+    }
 
+    void Incrice_The_Number_Of_Element()
+    {
+        if (_numberOfEllemnts < 2)
+        {
+            if (_lvlCounter > 1)
+            {
+                Debug.Log("test");
+                NumberOfEmelentsInLevel++;
+                _lvlCounter = 0;
+            }
+        }
+    }
+
+    void Clear_List_Of_Right_Indexes()
+    {
+        if (_ListOfRightIndex.Count == listOfSprites.Count / 2)
+            _ListOfRightIndex.Clear();
     }
 
     IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
@@ -114,7 +150,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     void Spawn_Manager()
     {
+
         _numberOfEllemnts++;
+
         for (int i = 0; i < _numberOfEllemnts; i++)
         {
             GameObject newBtn = Instantiate(btnPrefab, panel);
@@ -129,6 +167,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     void Fill_Lists()
     {
+        if (!Game_Over_Manager.isLevel)
+            _indexOfTheRightAnswer = Randomize_Right_Index();
+
         _listOfSpritesInThePhase.Add(listOfSprites[_indexOfTheRightAnswer]);
         _listOfAudioClipsInThePhase.Add(listOfAudioClips[_indexOfTheRightAnswer]);
         _listOfIndexes.Add(_indexOfTheRightAnswer);
@@ -186,8 +227,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             StartCoroutine(hiden.UnhideCard());
             _audioSource.PlayOneShot(wrongSfx);
             answerImg.sprite = wrong;
-            _health = Health(_health);
-            Debug.Log(_health);
+            _health = Health((int)_health);
         }
         _lvlCounter++;
         WinLoseBeBehaviour();
@@ -209,10 +249,12 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         answerPanel.SetActive(true);
         yield return new WaitForSeconds(1);
         StartCoroutine(hiden.Hide_Card_Coroutine());
+
         yield return new WaitForSeconds(1);
         answerPanel.SetActive(false);
         _numberOfEllemnts = NumberOfEmelentsInLevel;
-        timeBettwenAudioClips -= 0.1f;
+        if (timeBettwenAudioClips > 0.6f)
+            timeBettwenAudioClips -= 0.1f;
         _indexOfTheRightAnswer++;
         _lisOfcards.Clear();
         _listOfIndexes.Clear();
@@ -278,6 +320,12 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         timerImg.fillAmount = _progress;
     }
 
+    void Health_Progress()
+    {
+        _healthProgress = (_health + 1) / (_maxHealth + 1);
+        healthImg.fillAmount = Mathf.Lerp(healthImg.fillAmount, _healthProgress, Time.deltaTime * _progressSpeed);
+    }
+
     void LevelManager()
     {
         switch (Game_Over_Manager.levelIndex)
@@ -323,18 +371,25 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     void WinLoseBeBehaviour()
     {
-        if (_timer < 0 || _health < 0)
+        if (Game_Over_Manager.isLevel)
         {
-            gameOverManager.WinLoseLevelManager(false);
-            _endGame = true;
+            if (_timer < 0 || _health < 0)
+            {
+                gameOverManager.WinLoseLevelManager(false);
+                _endGame = true;
+            }
+            else
+            {
+                if (_lvlCounter > numberOfSoundsInTheLvl)
+                {
+                    gameOverManager.WinLoseLevelManager(true, NumberOfStars((int)_health));
+                    _endGame = true;
+                }
+            }
         }
         else
         {
-            if (_lvlCounter > numberOfSoundsInTheLvl)
-            {
-                gameOverManager.WinLoseLevelManager(true, NumberOfStars(_health));
-                _endGame = true;
-            }
+            //Infinite Mode Panel
         }
     }
 
@@ -342,5 +397,27 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     {
         numHealth++;
         return numHealth;
+    }
+
+    int Randomize_Right_Index()
+    {
+        bool isTheRightIndex = false;
+        while (!isTheRightIndex)
+        {
+            isTheRightIndex = true;
+            _indexOfTheRightAnswer = Random.Range(0, listOfAudioClips.Count);
+            for (int i = 0; i < _ListOfRightIndex.Count; i++)
+            {
+                if (_indexOfTheRightAnswer == _ListOfRightIndex[i])
+                {
+                    isTheRightIndex = false;
+                    break;
+                }
+            }
+        }
+
+        _ListOfRightIndex.Add(_indexOfTheRightAnswer);
+
+        return _indexOfTheRightAnswer;
     }
 }
