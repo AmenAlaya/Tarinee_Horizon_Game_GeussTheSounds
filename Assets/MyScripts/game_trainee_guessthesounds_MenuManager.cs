@@ -17,21 +17,20 @@ public class game_trainee_guessthesounds_MenuManager : MonoBehaviour
 
     void Start_Tutorial()
     {
-        if (PlayerPrefs.GetInt(key, 1) == 1)
+        if (PlayerPrefs.GetInt(gameOverMan.levelMapGameName, 1) == 1)
         {
-            PlayerPrefs.SetInt(key, 0);
+            PlayerPrefs.SetInt(gameOverMan.levelMapGameName, 0);
             Load_Tutorial_Scene();
             canContinue = true;
-        }
-        else
-        {
-            canContinue = false;
         }
     }
     public void Load_Tutorial_Scene()
     {
-        isTutorial = true;
-        Game_Over_Manager.isLevel = true;
-        gameOverMan.Start_Game();
+        if (!isTutorial)
+        {
+            isTutorial = true;
+            Game_Over_Manager.isLevel = true;
+            gameOverMan.Start_Game();
+        }
     }
 }

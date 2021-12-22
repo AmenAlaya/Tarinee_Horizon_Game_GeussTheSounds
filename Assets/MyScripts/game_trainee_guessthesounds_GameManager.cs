@@ -68,7 +68,6 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     private float _score;
     private float _totalScore;
-
     public TextMeshProUGUI _scoretxt;
 
     public GameObject tutorialPanel;
@@ -114,6 +113,15 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
         if (!_endGame)
             WinLoseBeBehaviour();
+
+        if (Spawn)
+        {
+            if (!_endGame)
+            {
+                StartCoroutine(Clear_Lists());
+            }
+            Spawn = false;
+        }
     }
 
     void Incrice_The_Number_Of_Element()
@@ -248,12 +256,14 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
                 _timer = time;
                 _health = _maxHealth;
             }
-            _audioSource.PlayOneShot(rightSfx);
+            if (Game_Over_Manager.sfxOn)
+                _audioSource.PlayOneShot(rightSfx);
         }
         else
         {
             StartCoroutine(hiden.UnhideCard());
-            _audioSource.PlayOneShot(wrongSfx);
+            if (Game_Over_Manager.sfxOn)
+                _audioSource.PlayOneShot(wrongSfx);
             answerImg.sprite = wrong;
             _health = Health((int)_health);
 
@@ -265,10 +275,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         _lvlCounter++;
         playSfx = false;
         _timerIsRunning = false;
-        if (!_endGame)
-        {
-            StartCoroutine(Clear_Lists());
-        }
+        Spawn = true;
     }
 
     IEnumerator Clear_Lists()
@@ -291,12 +298,12 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         _indexOfTheRightAnswer++;
         _lisOfcards.Clear();
         _listOfIndexes.Clear();
-        Spawn = true;
-        if (Spawn)
+        if (!_endGame)
         {
+
             Fill_Lists();
             StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
-            Spawn = false;
+
         }
 
     }
@@ -474,19 +481,20 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     {
         if (game_trainee_guessthesounds_MenuManager.isTutorial && game_trainee_guessthesounds_MenuManager.canContinue)
         {
-            tutorialPanel.SetActive(false);
             game_trainee_guessthesounds_MenuManager.isTutorial = false;
+            game_trainee_guessthesounds_MenuManager.canContinue = false;
+            tutorialPanel.SetActive(false);
         }
         else if (game_trainee_guessthesounds_MenuManager.isTutorial && !game_trainee_guessthesounds_MenuManager.canContinue)
         {
-            gameOverManager.HomeBtn();
             game_trainee_guessthesounds_MenuManager.isTutorial = false;
+            gameOverManager.HomeBtn();
         }
     }
 
     public void Stop_Tutorial()
     {
-
-        game_trainee_guessthesounds_MenuManager.isTutorial = false;
+        if (game_trainee_guessthesounds_MenuManager.isTutorial)
+            game_trainee_guessthesounds_MenuManager.isTutorial = false;
     }
 }

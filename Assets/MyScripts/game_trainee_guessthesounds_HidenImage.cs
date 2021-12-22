@@ -23,7 +23,7 @@ public class game_trainee_guessthesounds_HidenImage : MonoBehaviour
                 HidenImage.sprite = _mySprite;
                 HidenImage.color = new Color32(255, 255, 255, 255);
             }
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
     }
 
@@ -40,7 +40,7 @@ public class game_trainee_guessthesounds_HidenImage : MonoBehaviour
                 HidenImage.sprite = _mySprite;
                 HidenImage.color = new Color32(0, 0, 0, 100);
             }
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
     }
 }
