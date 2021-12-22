@@ -221,6 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myImage: {fileID: 6782287871979944433}
+  gameOverMan: {fileID: 0}
+  circle: {fileID: 6611222513662537891, guid: 510b8ac97cf8c544783c905bd57fb9dc, type: 3}
 --- !u!1 &6782287872352866945
 GameObject:
   m_ObjectHideFlags: 0

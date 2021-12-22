@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 {
     public List<Sprite> listOfSprites;
@@ -65,19 +66,35 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     private List<int> _ListOfRightIndex = new List<int>();
 
+    private float _score;
+    private float _totalScore;
+
+    public TextMeshProUGUI _scoretxt;
+
+    public GameObject tutorialPanel;
+    public GameObject tutorialContainer;
+
     void Start()
     {
+        if (game_trainee_guessthesounds_MenuManager.isTutorial)
+        {
+            Spawn = false;
+            tutorialPanel.SetActive(true);
+        }
         _maxHealth = _health;
         _lvlCounter = 0;
         if (Game_Over_Manager.isLevel)
             LevelManager();
         else
         {
+            _scoretxt.enabled = true;
+            _score = 0;
             _numberOfEllemnts = 1;
         }
         NumberOfEmelentsInLevel = _numberOfEllemnts;
         _timer = time;
         _audioSource = GetComponent<AudioSource>();
+
         if (Spawn)
         {
             Fill_Lists();
@@ -95,6 +112,8 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             Incrice_The_Number_Of_Element();
             Clear_List_Of_Right_Indexes();
         }
+        if (!_endGame)
+            WinLoseBeBehaviour();
     }
 
     void Incrice_The_Number_Of_Element()
@@ -103,7 +122,6 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         {
             if (_lvlCounter > 1)
             {
-                Debug.Log("test");
                 NumberOfEmelentsInLevel++;
                 _lvlCounter = 0;
             }
@@ -118,6 +136,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
     {
+
         hidenImg.color = new Color32(0, 0, 0, 100);
         hidenImg.sprite = baffel;
         int NumberOfPhases = _listOfAudioClipsInThePhase.Count;
@@ -131,6 +150,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeForSpawnImages);
         _timerIsRunning = true;
+
+        hidenImg.enabled = true;
+
         hidenImg.sprite = equationMark;
         hidenImg.color = new Color32(255, 255, 255, 100);
         Spawn_Manager();
@@ -150,7 +172,6 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     void Spawn_Manager()
     {
-
         _numberOfEllemnts++;
 
         for (int i = 0; i < _numberOfEllemnts; i++)
@@ -220,6 +241,13 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         {
             StartCoroutine(hiden.UnhideCard());
             answerImg.sprite = right;
+            if (!Game_Over_Manager.isLevel)
+            {
+                _score = Score_Manager();
+                Set_Score();
+                _timer = time;
+                _health = _maxHealth;
+            }
             _audioSource.PlayOneShot(rightSfx);
         }
         else
@@ -228,9 +256,13 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             _audioSource.PlayOneShot(wrongSfx);
             answerImg.sprite = wrong;
             _health = Health((int)_health);
+
+
         }
+
+        Continue_Game();
+
         _lvlCounter++;
-        WinLoseBeBehaviour();
         playSfx = false;
         _timerIsRunning = false;
         if (!_endGame)
@@ -251,9 +283,10 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         StartCoroutine(hiden.Hide_Card_Coroutine());
 
         yield return new WaitForSeconds(1);
+
         answerPanel.SetActive(false);
         _numberOfEllemnts = NumberOfEmelentsInLevel;
-        if (timeBettwenAudioClips > 0.6f)
+        if (timeBettwenAudioClips > 1)
             timeBettwenAudioClips -= 0.1f;
         _indexOfTheRightAnswer++;
         _lisOfcards.Clear();
@@ -272,27 +305,16 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     {
         if (playSfx)
         {
-            _audioSource.PlayOneShot(listOfAudioClips[_indexOfTheRightAnswer]);
-            playSfx = false;
-            timeLeft = 0;
-            StartCoroutine(CountTimer());
+            StartCoroutine(Count_Timer());
         }
-
-
-
     }
-    IEnumerator CountTimer()
+    IEnumerator Count_Timer()
     {
-        while (!playSfx)
-        {
-            yield return new WaitForSeconds(1f);
-
-            timeLeft++;
-
-            if (timeLeft > reloadTime)
-                playSfx = true;
-
-        }
+        _audioSource.PlayOneShot(listOfAudioClips[_indexOfTheRightAnswer]);
+        playSfx = false;
+        yield return new WaitForSeconds(2f);
+        playSfx = true;
+        _audioSource.Stop();
     }
 
     void Timer()
@@ -341,23 +363,23 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
                 break;
             case 2:
                 _numberOfEllemnts = 2;
-                _indexOfTheRightAnswer = 11;
+                _indexOfTheRightAnswer = 12;
                 break;
             case 3:
                 _numberOfEllemnts = 2;
-                _indexOfTheRightAnswer = 16;
+                _indexOfTheRightAnswer = 18;
                 break;
             case 4:
                 _numberOfEllemnts = 2;
-                _indexOfTheRightAnswer = 21;
+                _indexOfTheRightAnswer = 24;
                 break;
             case 5:
                 _numberOfEllemnts = 3;
-                _indexOfTheRightAnswer = 26;
+                _indexOfTheRightAnswer = 30;
                 break;
             case 6:
                 _numberOfEllemnts = 3;
-                _indexOfTheRightAnswer = 31;
+                _indexOfTheRightAnswer = 36;
                 break;
         }
     }
@@ -371,14 +393,22 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 
     void WinLoseBeBehaviour()
     {
-        if (Game_Over_Manager.isLevel)
+
+        if (_timer <= 0 || _health < 0)
         {
-            if (_timer < 0 || _health < 0)
+            if (Game_Over_Manager.isLevel)
             {
                 gameOverManager.WinLoseLevelManager(false);
-                _endGame = true;
             }
             else
+            {
+                gameOverManager.In_Game_Score_Panel_Handler((int)_totalScore);
+            }
+            _endGame = true;
+        }
+        else
+        {
+            if (Game_Over_Manager.isLevel)
             {
                 if (_lvlCounter > numberOfSoundsInTheLvl)
                 {
@@ -387,10 +417,8 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            //Infinite Mode Panel
-        }
+
+
     }
 
     int NumberOfStars(int numHealth)
@@ -419,5 +447,46 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         _ListOfRightIndex.Add(_indexOfTheRightAnswer);
 
         return _indexOfTheRightAnswer;
+    }
+
+    float Score_Manager()
+    {
+        float score = 100;
+
+        score = (int)((score * _timer) / time);
+        return score;
+    }
+
+    void Set_Score()
+    {
+        _totalScore += _score;
+        _scoretxt.text = _totalScore.ToString();
+    }
+
+    public void NextBtn()
+    {
+        tutorialContainer.SetActive(false);
+        Fill_Lists();
+        StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
+    }
+
+    void Continue_Game()
+    {
+        if (game_trainee_guessthesounds_MenuManager.isTutorial && game_trainee_guessthesounds_MenuManager.canContinue)
+        {
+            tutorialPanel.SetActive(false);
+            game_trainee_guessthesounds_MenuManager.isTutorial = false;
+        }
+        else if (game_trainee_guessthesounds_MenuManager.isTutorial && !game_trainee_guessthesounds_MenuManager.canContinue)
+        {
+            gameOverManager.HomeBtn();
+            game_trainee_guessthesounds_MenuManager.isTutorial = false;
+        }
+    }
+
+    public void Stop_Tutorial()
+    {
+
+        game_trainee_guessthesounds_MenuManager.isTutorial = false;
     }
 }
