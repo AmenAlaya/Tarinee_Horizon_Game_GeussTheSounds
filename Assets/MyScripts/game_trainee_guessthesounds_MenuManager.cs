@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class game_trainee_guessthesounds_MenuManager : MonoBehaviour
 {
     public static bool isTutorial = false;
@@ -10,7 +10,7 @@ public class game_trainee_guessthesounds_MenuManager : MonoBehaviour
 
     public Game_Over_Manager gameOverMan;
 
-    void Awake()
+    void Start()
     {
         Start_Tutorial();
     }

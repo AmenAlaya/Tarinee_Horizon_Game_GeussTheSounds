@@ -56,6 +56,7 @@ public class Game_Over_Manager : MonoBehaviour
 
     float currentTime = 0;
     bool isPaused = false;
+    bool isYouShouldNotPressThatButtonTwicePressed = false;
     int timerCounter = 2;
 
     bool isStarScaled = true;
@@ -185,14 +186,14 @@ public class Game_Over_Manager : MonoBehaviour
 
     public void WinLoseLevelManager(bool isWin, int starsCount)
     {
-        WinLoseLevelManager(true);
+        WinLoseLevelManager(isWin);
         SaveDataManager(starsCount);
         StartCoroutine(starsAnimation(starsCount));
     }
 
     void SoundsStats()
     {
-        musicOn = (PlayerPrefs.GetInt("Sound_Enabled", 0) == 1);
+        musicOn = (PlayerPrefs.GetInt("Sound_Enabled", 1) == 1);
 
         myMusicPlayer.mute = !musicOn;
         myAudioSource.mute = !sfxOn;
@@ -293,37 +294,54 @@ public class Game_Over_Manager : MonoBehaviour
             {
                 asyncOperation.allowSceneActivation = true;
             }
-            loadingPanel.SetActive(false);
             yield return null;
         }
     }
 
     public void Start_Game()
     {
-        StartCoroutine(LoadScene(levelMapGameName + "_2_MainGame"));
+        if (!isYouShouldNotPressThatButtonTwicePressed)
+        {
+            isYouShouldNotPressThatButtonTwicePressed = true;
+            StartCoroutine(LoadScene(levelMapGameName + "_2_MainGame"));
+        }
     }
 
     public void HomeBtn()
     {
-        StartCoroutine(LoadScene(levelMapGameName + "_1_MainMenu"));
+        if (!isYouShouldNotPressThatButtonTwicePressed)
+        {
+            isYouShouldNotPressThatButtonTwicePressed = true;
+            StartCoroutine(LoadScene(levelMapGameName + "_1_MainMenu"));
+        }
     }
 
     public void RetryLevel()
     {
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().path));
+        if (!isYouShouldNotPressThatButtonTwicePressed)
+        {
+            isYouShouldNotPressThatButtonTwicePressed = true;
+            StartCoroutine(LoadScene(SceneManager.GetActiveScene().path));
+        }
     }
 
     public void NextLevel()
     {
-        if (levelIndex == (levelsContainer.childCount-1) || isReachedLastLevel)
+        if (!isYouShouldNotPressThatButtonTwicePressed)
         {
-            Set_Level_As_Finished();
-            Quit();
-        }
-        else
-        {
-            levelIndex++;
-            RetryLevel();
+            isYouShouldNotPressThatButtonTwicePressed = true;
+            if (levelIndex == (levelsContainer.childCount - 1) || isReachedLastLevel)
+            {
+                Set_Level_As_Finished();
+                isYouShouldNotPressThatButtonTwicePressed = false;
+                Quit();
+            }
+            else
+            {
+                levelIndex++;
+                isYouShouldNotPressThatButtonTwicePressed = false;
+                RetryLevel();
+            }
         }
     }
 
@@ -503,15 +521,19 @@ public class Game_Over_Manager : MonoBehaviour
     public void Quit()
     {
         //Here we must adapt each code with the game
-        if (PlayerPrefs.GetInt("Dlc_Is_Open_From_Map", 0) == 0)
+        if (!isYouShouldNotPressThatButtonTwicePressed)
         {
-            StartCoroutine(LoadScene("1-Main_Menu"));
+            isYouShouldNotPressThatButtonTwicePressed = true;
+            Time.timeScale = 1;
+            if (PlayerPrefs.GetInt("Dlc_Is_Open_From_Map", 0) == 0)
+            {
+                StartCoroutine(LoadScene("1-Main_Menu"));
+            }
+            else
+            {
+                StartCoroutine(LoadScene("4_Map_Scene"));
+            }
         }
-        else
-        {
-            StartCoroutine(LoadScene("4_Map_Scene"));
-        }
-
     }
 
     void SaveDataManager(int starsOwned)

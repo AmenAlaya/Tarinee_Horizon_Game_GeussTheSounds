@@ -61,14 +61,16 @@ public class ChangeBackgroundColorScript : MonoBehaviour
             CanChange = false;
         }
         //It is call every frame, but it does not work until CanChange is equal to true
-        StartCoroutine(ChangingColor());
+        if (CanChange == true)
+        {
+            StartCoroutine(ChangingColor());
+        }
     }
     //Coroutine that allow us to change the background color
     IEnumerator ChangingColor()
     {
 
-        if (CanChange == true)
-        {
+       
             //Stop the timer
             CanCountDown = false;
 
@@ -106,6 +108,5 @@ public class ChangeBackgroundColorScript : MonoBehaviour
                 CanCountDown = true;
                 yield return null;
             }
-        }
     }
 }
