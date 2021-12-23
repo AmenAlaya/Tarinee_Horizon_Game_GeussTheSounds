@@ -49,6 +49,7 @@ public class ChangeBackgroundColorScript : MonoBehaviour
         //Check if it is time to change the color
         if (CurrentTime <= 0.0f)
         {
+           
             CurrentTime = TimeToChangeColors;
             CanChange = true;
         }
@@ -61,50 +62,49 @@ public class ChangeBackgroundColorScript : MonoBehaviour
         }
         //It is call every frame, but it does not work until CanChange is equal to true
         StartCoroutine(ChangingColor());
+    }
+    //Coroutine that allow us to change the background color
+    IEnumerator ChangingColor()
+    {
 
-        //Coroutine that allow us to change the background color
-        IEnumerator ChangingColor()
+        if (CanChange == true)
         {
+            //Stop the timer
+            CanCountDown = false;
 
-            if (CanChange == true)
+            Color colorA = cam.backgroundColor;
+            Color colorB = ColorsArray[0];
+
+            //Check if the next color is less than the number of elements of ColorsArray
+            if (CurrentColor + 1 < ColorsArray.Length)
             {
-                //Stop the timer
-                CanCountDown = false;
+                //if true, the following color will be equal to CurrentColor plus 1
+                colorB = ColorsArray[CurrentColor + 1];
+            }
 
-                Color colorA = cam.backgroundColor;
-                Color colorB = ColorsArray[0];
-                
-                //Check if the next color is less than the number of elements of ColorsArray
-                if (CurrentColor + 1 < ColorsArray.Length)
+            //Change the color
+            Color NewColor = Color.Lerp(colorA, colorB, Time.deltaTime * TransitionSpeed);
+            //Assign the color to the background
+            ChangeColor(NewColor);
+
+
+            if (NewColor == colorB)
+            {
+                CanChange = false;
+
+                //Pick the next color
+                if (CurrentColor < ColorsArray.Length)
                 {
-                    //if true, the following color will be equal to CurrentColor plus 1
-                    colorB = ColorsArray[CurrentColor + 1];
+                    CurrentColor++;
+                }
+                else
+                {
+                    CurrentColor = 0;
                 }
 
-                //Change the color
-                Color NewColor = Color.Lerp(colorA, colorB, Time.deltaTime * TransitionSpeed);
-                //Assign the color to the background
-                ChangeColor(NewColor);
-
-                
-                if (NewColor == colorB)
-                { 
-                    CanChange = false;
-
-                    //Pick the next color
-                    if (CurrentColor < ColorsArray.Length)
-                    {
-                        CurrentColor++;
-                    }
-                    else
-                    {
-                        CurrentColor = 0;
-                    }
-
-                    //Start the timer again
-                    CanCountDown = true;
-                    yield return null;
-                }
+                //Start the timer again
+                CanCountDown = true;
+                yield return null;
             }
         }
     }
