@@ -247,7 +247,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     {
         if (index == _indexOfTheRightAnswer)
         {
-            StartCoroutine(hiden.UnhideCard());
+            hiden.Hide_The_Image(false);
             answerImg.sprite = right;
             if (!Game_Over_Manager.isLevel)
             {
@@ -261,13 +261,11 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(hiden.UnhideCard());
+            hiden.Hide_The_Image(false);
             if (Game_Over_Manager.sfxOn)
                 _audioSource.PlayOneShot(wrongSfx);
             answerImg.sprite = wrong;
             _health = Health((int)_health);
-
-
         }
 
         Continue_Game();
@@ -276,6 +274,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         playSfx = false;
         _timerIsRunning = false;
         Spawn = true;
+
     }
 
     IEnumerator Clear_Lists()
@@ -284,13 +283,10 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         {
             Destroy(_lisOfcards[i]);
         }
-        StartCoroutine(hiden.UnhideCard());
         answerPanel.SetActive(true);
+        yield return new WaitForSeconds(2);
+        hiden.Hide_The_Image(true);
         yield return new WaitForSeconds(1);
-        StartCoroutine(hiden.Hide_Card_Coroutine());
-
-        yield return new WaitForSeconds(1);
-
         answerPanel.SetActive(false);
         _numberOfEllemnts = NumberOfEmelentsInLevel;
         if (timeBettwenAudioClips > 1)
@@ -300,10 +296,8 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         _listOfIndexes.Clear();
         if (!_endGame)
         {
-
             Fill_Lists();
             StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
-
         }
 
     }
