@@ -1,0 +1,251 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5378524194867136454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5378524194867136448}
+  - component: {fileID: 5378524194867136449}
+  m_Layer: 0
+  m_Name: Audio_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5378524194867136448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378524194867136454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5378524194867136449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378524194867136454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ae370012160d143bf1909ba4903532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sounds:
+  - name: Music
+    clip: {fileID: 8300000, guid: e18713d5c19d4a84fa2c91618335bcd5, type: 3}
+    volume: 0.46
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Click_Sfx
+    clip: {fileID: 8300000, guid: 7ad1151c25639724ea1ffe4bd262bf25, type: 3}
+    volume: 0.37
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bubble_Sfx
+    clip: {fileID: 8300000, guid: 7c303f313c0c57e4fb8d005f0ae65ebc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Whoosh_Sfx
+    clip: {fileID: 8300000, guid: a4654791426d12d4f91f90b1c78af5e3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: InfniteMode_Sfx
+    clip: {fileID: 8300000, guid: d15d2dbe42e36cf4fb27f94524e4ace1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Win_Sfx
+    clip: {fileID: 8300000, guid: f2550f92922d74248922d6184f32f68c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Lose_Sfx
+    clip: {fileID: 8300000, guid: ba8e5c2372d362f4284b119af33bdd41, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Last_Level_Reached_Sfx
+    clip: {fileID: 8300000, guid: a7bb2afe1e5b8ac409d2682d82f25448, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Last_Level_Reached_Sfx
+    clip: {fileID: 8300000, guid: a7bb2afe1e5b8ac409d2682d82f25448, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Counter_Sfx
+    clip: {fileID: 8300000, guid: 1fbf9e400f603da498a181dc1b99e48b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  _feridSounds:
+  - name: Ferid_Talks_Hello_0
+    clip: {fileID: 8300000, guid: b17cb867649c3a04388f472e0707cec0, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Ferid_Talks_Hello_1
+    clip: {fileID: 8300000, guid: d51492607c90f9849abd026e6abbe9b8, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Ferid_Talks_Hello_2
+    clip: {fileID: 8300000, guid: 3dd56ccfcf1bdd449ad5a13538333824, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Ferid_Talks_Hello_3
+    clip: {fileID: 8300000, guid: 32bc6c7da07dd7e46a090a279cd7e553, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: You can challenge your friends after completing all the levels
+    clip: {fileID: 8300000, guid: 4e8337404000dfa4686716c46c10a3e4, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: You can now challenge your friends with the infinite mode
+    clip: {fileID: 8300000, guid: cde846bc30efc2f4fa3a0290701332d5, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: You have to finish all the levels first
+    clip: {fileID: 8300000, guid: c0832fb242e3ce6459ec0cda1a43387c, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: "you can follow your experience level through Ferid\u2019s button"
+    clip: {fileID: 8300000, guid: 5334f80f54debcf428b86c4ae9a7d68c, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: "You can follow your ranking with Ferid\u2019s button"
+    clip: {fileID: 8300000, guid: 1c63007bd65b6e04dad319fdb354f3a2, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: To go back to ferid's world press the settings button
+    clip: {fileID: 8300000, guid: eb69cf95bbc14214c929924d3c3f7ed5, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Let's learn how to play the game
+    clip: {fileID: 8300000, guid: 32c6bb655f0f0464a8c9f0c493a77aee, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: let's discover this level
+    clip: {fileID: 8300000, guid: 149da177a72f055479e80365aa93016c, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: let's try to solve this level
+    clip: {fileID: 8300000, guid: 652da2e4601a3e240bcbbb6f1e267518, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: let the fun begins
+    clip: {fileID: 8300000, guid: ab5e0e33e650fbe4c9f5df0af8387067, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: lets try again
+    clip: {fileID: 8300000, guid: 356ae77faa741f347a4af2c3460ae752, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Oh oh let's try again
+    clip: {fileID: 8300000, guid: fcc6091e0052e334986e2973b04f2d40, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: "Don\u2019t give up! We can do it"
+    clip: {fileID: 8300000, guid: d7daafd60445ef641948ba9a5e1001d7, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: perfect
+    clip: {fileID: 8300000, guid: 8a6019a73fbd05547921b8f18b7ef41a, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Keep going
+    clip: {fileID: 8300000, guid: 7960f951a9dfbdd4cbaf14149b6eaad0, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Good Job
+    clip: {fileID: 8300000, guid: 0a19ad427781c3847bbee094b025d765, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Very good
+    clip: {fileID: 8300000, guid: 1cef332b32930154582f210efe8aa97c, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: nice but we can do better
+    clip: {fileID: 8300000, guid: 3bbe5e197ed77f04084f9e19cb115dd4, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 1,2,3 lets gooo
+    clip: {fileID: 8300000, guid: 3295c95a4a2d234439f39129fa89f050, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: GREAT You get a new high score
+    clip: {fileID: 8300000, guid: 19d23f6a1003d194a82a1bad972b47bb, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}

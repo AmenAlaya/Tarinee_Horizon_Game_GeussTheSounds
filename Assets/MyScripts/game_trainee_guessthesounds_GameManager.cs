@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 {
     public List<Sprite> listOfSprites;
     public List<AudioClip> listOfAudioClips;
 
     private int _numberOfEllemnts;
+
     [HideInInspector]
     public int _indexOfTheRightAnswer;
 
@@ -53,7 +55,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     private float _health = 2;
     private float _maxHealth;
 
-    public Game_Over_Manager gameOverManager;
+    public Game_Over_2_GameInteraction gameOverManager;
 
     private bool _endGame = false;
 
@@ -73,16 +75,16 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     public GameObject tutorialPanel;
     public GameObject tutorialContainer;
 
-    void Start()
+    private void Start()
     {
-        if (game_trainee_guessthesounds_MenuManager.isTutorial)
+        if (Game_Over_2_LevelManager.isTuto)
         {
             Spawn = false;
             tutorialPanel.SetActive(true);
         }
         _maxHealth = _health;
         _lvlCounter = 0;
-        if (Game_Over_Manager.isLevel)
+        if (Game_Over_2_LevelManager.isLevel)
             LevelManager();
         else
         {
@@ -94,7 +96,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         _timer = time;
         _audioSource = GetComponent<AudioSource>();
 
-        if (Spawn)
+        if (Spawn && !Game_Over_2_LevelManager.isPaused)
         {
             Fill_Lists();
             StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
@@ -102,11 +104,11 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         Timer();
         Health_Progress();
-        if (!Game_Over_Manager.isLevel)
+        if (!Game_Over_2_LevelManager.isLevel)
         {
             Incrice_The_Number_Of_Element();
             Clear_List_Of_Right_Indexes();
@@ -124,7 +126,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
     }
 
-    void Incrice_The_Number_Of_Element()
+    private void Incrice_The_Number_Of_Element()
     {
         if (_numberOfEllemnts < 2)
         {
@@ -136,15 +138,14 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
     }
 
-    void Clear_List_Of_Right_Indexes()
+    private void Clear_List_Of_Right_Indexes()
     {
         if (_ListOfRightIndex.Count == listOfSprites.Count / 2)
             _ListOfRightIndex.Clear();
     }
 
-    IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
+    private IEnumerator Start_The_Phase(float timeOfPlaySounds, float timeForSpawnImages)
     {
-
         hidenImg.color = new Color32(0, 0, 0, 100);
         hidenImg.sprite = baffel;
         int NumberOfPhases = _listOfAudioClipsInThePhase.Count;
@@ -167,18 +168,18 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         playSfx = true;
     }
 
-    void Play_Sound(int index)
+    private void Play_Sound(int index)
     {
         _audioSource.PlayOneShot(_listOfAudioClipsInThePhase[index]);
     }
 
-    void Stop_Sound(int index)
+    private void Stop_Sound(int index)
     {
         _audioSource.Stop();
         _listOfAudioClipsInThePhase.RemoveAt(index);
     }
 
-    void Spawn_Manager()
+    private void Spawn_Manager()
     {
         _numberOfEllemnts++;
 
@@ -194,9 +195,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
     }
 
-    void Fill_Lists()
+    private void Fill_Lists()
     {
-        if (!Game_Over_Manager.isLevel)
+        if (!Game_Over_2_LevelManager.isLevel)
             _indexOfTheRightAnswer = Randomize_Right_Index();
 
         _listOfSpritesInThePhase.Add(listOfSprites[_indexOfTheRightAnswer]);
@@ -212,10 +213,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             _listOfAudioClipsInThePhase.Add(listOfAudioClips[indexOfAudioClip]);
             _listOfIndexes.Add(indexOfAudioClip);
         }
-
     }
 
-    int Random_Index()
+    private int Random_Index()
     {
         bool checkIndex = false;
         int ran = 0;
@@ -237,7 +237,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         return ran;
     }
 
-    int Randomize_Sounds()
+    private int Randomize_Sounds()
     {
         int randSound = Random.Range(0, _listOfAudioClipsInThePhase.Count);
         return randSound;
@@ -249,20 +249,20 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         {
             hiden.Hide_The_Image(false);
             answerImg.sprite = right;
-            if (!Game_Over_Manager.isLevel)
+            if (!Game_Over_2_LevelManager.isLevel)
             {
                 _score = Score_Manager();
                 Set_Score();
                 _timer = time;
                 _health = _maxHealth;
             }
-            if (Game_Over_Manager.sfxOn)
+            if (!Game_Over_2_OptionPanel.sfxMuted)
                 _audioSource.PlayOneShot(rightSfx);
         }
         else
         {
             hiden.Hide_The_Image(false);
-            if (Game_Over_Manager.sfxOn)
+            if (!Game_Over_2_OptionPanel.sfxMuted)
                 _audioSource.PlayOneShot(wrongSfx);
             answerImg.sprite = wrong;
             _health = Health((int)_health);
@@ -274,10 +274,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         playSfx = false;
         _timerIsRunning = false;
         Spawn = true;
-
     }
 
-    IEnumerator Clear_Lists()
+    private IEnumerator Clear_Lists()
     {
         for (int i = 0; i < _lisOfcards.Count; i++)
         {
@@ -299,7 +298,6 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             Fill_Lists();
             StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
         }
-
     }
 
     public void Play_Rigth_Sound()
@@ -309,7 +307,8 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             StartCoroutine(Count_Timer());
         }
     }
-    IEnumerator Count_Timer()
+
+    private IEnumerator Count_Timer()
     {
         _audioSource.PlayOneShot(listOfAudioClips[_indexOfTheRightAnswer]);
         playSfx = false;
@@ -318,7 +317,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         _audioSource.Stop();
     }
 
-    void Timer()
+    private void Timer()
     {
         if (_timerIsRunning)
         {
@@ -326,8 +325,6 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             {
                 _timer -= Time.deltaTime;
                 Timer_Fill_Amont();
-
-
             }
             else
             {
@@ -337,21 +334,21 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
     }
 
-    void Timer_Fill_Amont()
+    private void Timer_Fill_Amont()
     {
         _progress = _timer / time;
         timerImg.fillAmount = _progress;
     }
 
-    void Health_Progress()
+    private void Health_Progress()
     {
         _healthProgress = (_health + 1) / (_maxHealth + 1);
         healthImg.fillAmount = Mathf.Lerp(healthImg.fillAmount, _healthProgress, Time.deltaTime * _progressSpeed);
     }
 
-    void LevelManager()
+    private void LevelManager()
     {
-        switch (Game_Over_Manager.levelIndex)
+        switch (Game_Over_2_LevelManager.levelIndex)
         {
             case 0:
                 _numberOfEllemnts = 1;
@@ -362,22 +359,27 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
                 _numberOfEllemnts = 1;
                 _indexOfTheRightAnswer = 6;
                 break;
+
             case 2:
                 _numberOfEllemnts = 2;
                 _indexOfTheRightAnswer = 12;
                 break;
+
             case 3:
                 _numberOfEllemnts = 2;
                 _indexOfTheRightAnswer = 18;
                 break;
+
             case 4:
                 _numberOfEllemnts = 2;
                 _indexOfTheRightAnswer = 24;
                 break;
+
             case 5:
                 _numberOfEllemnts = 3;
                 _indexOfTheRightAnswer = 30;
                 break;
+
             case 6:
                 _numberOfEllemnts = 3;
                 _indexOfTheRightAnswer = 36;
@@ -385,50 +387,47 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         }
     }
 
-    int Health(int health)
+    private int Health(int health)
     {
         int h = health;
         h--;
         return h;
     }
 
-    void WinLoseBeBehaviour()
+    private void WinLoseBeBehaviour()
     {
-
         if (_timer <= 0 || _health < 0)
         {
-            if (Game_Over_Manager.isLevel)
+            if (Game_Over_2_LevelManager.isLevel)
             {
-                gameOverManager.WinLoseLevelManager(false);
+                gameOverManager.Game_Over(false);
             }
             else
             {
-                gameOverManager.In_Game_Score_Panel_Handler((int)_totalScore);
+                gameOverManager.Score_Handeler((int)_totalScore);
             }
             _endGame = true;
         }
         else
         {
-            if (Game_Over_Manager.isLevel)
+            if (Game_Over_2_LevelManager.isLevel)
             {
                 if (_lvlCounter > numberOfSoundsInTheLvl)
                 {
-                    gameOverManager.WinLoseLevelManager(true, NumberOfStars((int)_health));
+                    gameOverManager.Game_Over(true, NumberOfStars((int)_health));
                     _endGame = true;
                 }
             }
         }
-
-
     }
 
-    int NumberOfStars(int numHealth)
+    private int NumberOfStars(int numHealth)
     {
         numHealth++;
         return numHealth;
     }
 
-    int Randomize_Right_Index()
+    private int Randomize_Right_Index()
     {
         bool isTheRightIndex = false;
         while (!isTheRightIndex)
@@ -450,7 +449,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         return _indexOfTheRightAnswer;
     }
 
-    float Score_Manager()
+    private float Score_Manager()
     {
         float score = 100;
 
@@ -458,7 +457,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         return score;
     }
 
-    void Set_Score()
+    private void Set_Score()
     {
         _totalScore += _score;
         _scoretxt.text = _totalScore.ToString();
@@ -471,24 +470,18 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         StartCoroutine(Start_The_Phase(timeBettwenAudioClips, timeBeforeSpawn));
     }
 
-    void Continue_Game()
+    private void Continue_Game()
     {
-        if (game_trainee_guessthesounds_MenuManager.isTutorial && game_trainee_guessthesounds_MenuManager.canContinue)
+        if (Game_Over_2_LevelManager.isTuto)
         {
-            game_trainee_guessthesounds_MenuManager.isTutorial = false;
-            game_trainee_guessthesounds_MenuManager.canContinue = false;
+            Game_Over_2_LevelManager.isTuto = false;
             tutorialPanel.SetActive(false);
-        }
-        else if (game_trainee_guessthesounds_MenuManager.isTutorial && !game_trainee_guessthesounds_MenuManager.canContinue)
-        {
-            game_trainee_guessthesounds_MenuManager.isTutorial = false;
-            gameOverManager.HomeBtn();
         }
     }
 
     public void Stop_Tutorial()
     {
-        if (game_trainee_guessthesounds_MenuManager.isTutorial)
-            game_trainee_guessthesounds_MenuManager.isTutorial = false;
+        if (Game_Over_2_LevelManager.isTuto)
+            Game_Over_2_LevelManager.isTuto = false;
     }
 }
