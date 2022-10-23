@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UPersian.Components;
 
 public class game_trainee_guessthesounds_GameManager : MonoBehaviour
 {
@@ -46,9 +47,9 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     public game_trainee_guessthesounds_HidenImage hiden;
 
     public GameObject answerPanel;
-    public Image answerImg;
 
-    public Sprite wrong, right;
+    public RtlText anwerTxt;
+
     public AudioClip wrongSfx, rightSfx;
 
     private int NumberOfEmelentsInLevel;
@@ -248,7 +249,6 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
         if (index == _indexOfTheRightAnswer)
         {
             hiden.Hide_The_Image(false);
-            answerImg.sprite = right;
             if (!Game_Over_2_LevelManager.isLevel)
             {
                 _score = Score_Manager();
@@ -258,13 +258,15 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             }
             if (!Game_Over_2_OptionPanel.sfxMuted)
                 _audioSource.PlayOneShot(rightSfx);
+
+            Debug.Log(listOfAudioClips[index].name);
+            anwerTxt.text = listOfAudioClips[index].name;
         }
         else
         {
             hiden.Hide_The_Image(false);
             if (!Game_Over_2_OptionPanel.sfxMuted)
                 _audioSource.PlayOneShot(wrongSfx);
-            answerImg.sprite = wrong;
             _health = Health((int)_health);
         }
 
@@ -304,6 +306,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
     {
         if (playSfx)
         {
+            Debug.Log(listOfAudioClips[_indexOfTheRightAnswer].name + " " + _indexOfTheRightAnswer);
             StartCoroutine(Count_Timer());
         }
     }
