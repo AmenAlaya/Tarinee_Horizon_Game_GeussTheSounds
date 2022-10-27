@@ -70,7 +70,7 @@ public class Game_Over_2_FB_Interactions : MonoBehaviour
         //{
         //    yield return null;
         //}
-        //yield return result;
+        yield return result;
 #else
         yield return null;
 #endif

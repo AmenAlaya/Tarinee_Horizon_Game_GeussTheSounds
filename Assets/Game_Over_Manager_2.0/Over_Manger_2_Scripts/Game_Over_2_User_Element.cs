@@ -12,6 +12,12 @@ public class Game_Over_2_User_Element : MonoBehaviour
 
     [SerializeField] private Game_Over_2_User_Avatar_Image_Frame _myAvatarFrame;
 
+    private void Awake()
+    {
+        _myRankTxt.text = "";
+        _myBestScoreTxt.text = "";
+    }
+
     public void Assgin_Player_Stats(string myName, int myBestScore, int myRank, int avatar)
     {
         _myNameTxt.text = myName;

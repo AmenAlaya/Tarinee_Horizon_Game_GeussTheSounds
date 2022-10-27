@@ -77,7 +77,8 @@ public class Game_Over_2_LoadScene : MonoBehaviour
         {
             LoadScene("4_Map_Scene");
         }
-		Destroy(Game_Over_2_AudioManager.audioManInstance.gameObject);
+        Destroy(Game_Over_2_AudioManager.audioManInstance.gameObject);
+        Destroy(Game_Over_2_Manager.instance.gameObject);
     }
 
     private IEnumerator Load_Scene(string sceneName_Path)

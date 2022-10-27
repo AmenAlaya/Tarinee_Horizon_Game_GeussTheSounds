@@ -268,6 +268,7 @@ public class game_trainee_guessthesounds_GameManager : MonoBehaviour
             if (!Game_Over_2_OptionPanel.sfxMuted)
                 _audioSource.PlayOneShot(wrongSfx);
             _health = Health((int)_health);
+            anwerTxt.text = "خطأ";
         }
 
         Continue_Game();

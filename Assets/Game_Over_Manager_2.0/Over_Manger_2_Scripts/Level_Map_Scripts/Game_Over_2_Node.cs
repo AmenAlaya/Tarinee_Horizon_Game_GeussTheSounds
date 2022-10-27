@@ -42,6 +42,7 @@ public class Game_Over_2_Node : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(Game_Over_2_Constants.GAME_DATA_STARS + Game_Over_2_Constants.COOL_SEPERATOR + levelIndex))
         {
+            Debug.Log(Game_Over_2_Constants.GAME_DATA_STARS);
             for (int i = 0; i < PlayerPrefs.GetInt(Game_Over_2_Constants.GAME_DATA_STARS + Game_Over_2_Constants.COOL_SEPERATOR + levelIndex); i++)
             {
                 _stars[i].SetActive(true);

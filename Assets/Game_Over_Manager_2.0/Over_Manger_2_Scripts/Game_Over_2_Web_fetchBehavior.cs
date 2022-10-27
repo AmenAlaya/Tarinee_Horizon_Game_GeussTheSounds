@@ -23,7 +23,7 @@ public class Game_Over_2_Web_fetchBehavior : MonoBehaviour
 
     private void Start()
     {
-		if (_text != null)
+        if (_text != null)
         _text.gameObject.SetActive(false);
     }
 

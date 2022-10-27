@@ -22,10 +22,30 @@ public class Game_Over_2_OptionPanel : MonoBehaviour
 
     private void Switchs_State()
     {
-        _sfxTaggles.onSwitch.SetActive(!sfxMuted);
-        _sfxTaggles.offSwitch.SetActive(sfxMuted);
-        _musicTaggle.onSwitch.SetActive(!musicMuted);
-        _musicTaggle.offSwitch.SetActive(musicMuted);
+        sfxMuted = (PlayerPrefs.GetInt(Game_Over_2_Constants.SFX_STATE, 1) != 1);
+        musicMuted = (PlayerPrefs.GetInt(Game_Over_2_Constants.MUSIC_STATE, 1) != 1);
+
+        if (sfxMuted)
+        {
+            _sfxTaggles.onSwitch.SetActive(false);
+            _sfxTaggles.offSwitch.SetActive(true);
+        }
+        else
+        {
+            _sfxTaggles.onSwitch.SetActive(true);
+            _sfxTaggles.offSwitch.SetActive(false);
+        }
+
+        if (musicMuted)
+        {
+            _musicTaggle.onSwitch.SetActive(false);
+            _musicTaggle.offSwitch.SetActive(true);
+        }
+        else
+        {
+            _musicTaggle.onSwitch.SetActive(true);
+            _musicTaggle.offSwitch.SetActive(false);
+        }
     }
 
     public void Open_Close_Settings_Panel(bool isOpened)
@@ -47,10 +67,12 @@ public class Game_Over_2_OptionPanel : MonoBehaviour
         if (sfxMuted)
         {
             sfxMuted = false;
+            PlayerPrefs.SetInt(Game_Over_2_Constants.SFX_STATE, 1);
         }
         else
         {
             sfxMuted = true;
+            PlayerPrefs.SetInt(Game_Over_2_Constants.SFX_STATE, 0);
         }
         _sfxTaggles.onSwitch.SetActive(!sfxMuted);
         _sfxTaggles.offSwitch.SetActive(sfxMuted);
@@ -62,10 +84,12 @@ public class Game_Over_2_OptionPanel : MonoBehaviour
         if (musicMuted)
         {
             musicMuted = false;
+            PlayerPrefs.SetInt(Game_Over_2_Constants.MUSIC_STATE, 1);
         }
         else
         {
             musicMuted = true;
+            PlayerPrefs.SetInt(Game_Over_2_Constants.MUSIC_STATE, 0);
         }
         _musicTaggle.onSwitch.SetActive(!musicMuted);
         _musicTaggle.offSwitch.SetActive(musicMuted);

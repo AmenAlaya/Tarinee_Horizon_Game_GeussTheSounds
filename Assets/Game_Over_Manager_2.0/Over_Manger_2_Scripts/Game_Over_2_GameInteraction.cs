@@ -8,6 +8,13 @@ using UPersian.Components;
 using System.Text;
 using UnityEngine.EventSystems;
 
+[System.Serializable]
+public class Elements
+{
+    public string elementName;
+    public int value;
+}
+
 public class Game_Over_2_GameInteraction : MonoBehaviour
 {
     [SerializeField] private Game_Over_2_FillAmout _fill;
@@ -67,35 +74,24 @@ public class Game_Over_2_GameInteraction : MonoBehaviour
 
     [SerializeField] private GameObject _mapButton;
 
+    [SerializeField] private int _indexOfHiSpeach;
+    [SerializeField] private Elements[] elements;
+
     private void Start()
     {
         Game_Over_2_LevelManager.isOver = false;
         _audioManager = Game_Over_2_AudioManager.audioManInstance;
         _gameOverManager = Game_Over_2_Manager.instance;
+        if (Game_Over_2_LevelManager.levelIndex == 0) Game_Over_2_LevelManager.isTuto = true;
         if (Game_Over_2_LevelManager.isTuto)
-            _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_TUTORIAL);
+        {
+            int randomWelcomeSpeachIngame = Random.Range(0, elements[0].value);
+            _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_TUTORIAL + randomWelcomeSpeachIngame.ToString());
+        }
         else
         {
-            int randomWelcomeSpeachIngame = Random.Range(0, 3);
-            Ferid_Say_Hi(randomWelcomeSpeachIngame);
-        }
-    }
-
-    private void Ferid_Say_Hi(int speach)
-    {
-        switch (speach)
-        {
-            case 0:
-                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_PLAY);
-                break;
-
-            case 1:
-                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_PLAY_1);
-                break;
-
-            case 2:
-                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_PLAY_2);
-                break;
+            int randomWelcomeSpeachIngame = Random.Range(0, _indexOfHiSpeach);
+            _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_PLAY + randomWelcomeSpeachIngame.ToString());
         }
     }
 
@@ -124,19 +120,11 @@ public class Game_Over_2_GameInteraction : MonoBehaviour
 
     private void Ferid_Lose_Behavior()
     {
-        int ran = Random.Range(0, 3);
+        int ran = Random.Range(0, elements[4].value);
         switch (ran)
         {
             case 0:
-                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_LOSE);
-                break;
-
-            case 1:
-                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_LOSE_1);
-                break;
-
-            case 2:
-                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_LOSE_2);
+                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_LETS_LOSE + ran.ToString());
                 break;
         }
     }
@@ -241,12 +229,15 @@ public class Game_Over_2_GameInteraction : MonoBehaviour
         if (s >= bestScore)
         {
             _bestScore.text = "أفضل نتيجة " + s.ToString();
-            _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_INFINITE_SCORE);
+            int ran = Random.Range(0, elements[6].value);
+            _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_BEST_SCORE + ran.ToString());
             PlayerPrefs.SetInt(Game_Over_2_Constants.GAME_DATA_BESTSCORE, s);
             _gameOverManager.Update_LeaderBoard_Value_FB(Game_Over_2_Constants.DB_BEST_SCORE, s);
         }
         else
         {
+            int ran = Random.Range(0, elements[5].value);
+            _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_SCORE + ran.ToString());
             _bestScore.text = "أفضل نتيجة " + bestScore.ToString();
         }
     }
@@ -262,7 +253,10 @@ public class Game_Over_2_GameInteraction : MonoBehaviour
             }
 
             if (!PlayerPrefs.HasKey(Game_Over_2_Constants.GAME_DATA_STARS + Game_Over_2_Constants.COOL_SEPERATOR + _lvlindex))
+            {
+                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_YOU_UNLOCKINFINITE_INFINITE_MODE);
                 _infiniteModeisOpend = true;
+            }
 
             Game_Over_2_SaveSystem.Final_Level_Reached(_lvlindex);
         }
@@ -284,32 +278,18 @@ public class Game_Over_2_GameInteraction : MonoBehaviour
         switch (starts)
         {
             case 1:
-                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_1_STARS_WIN); break;
+                ran = Random.Range(0, elements[1].value);
+                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_1_STARS_WIN + ran.ToString());
+                break;
 
             case 2:
-                ran = Random.Range(0, 2);
-                if (ran == 0)
-                {
-                    _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_2_STARS_WIN);
-                }
-                if (ran == 1)
-                {
-                    _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_2_STARS_WIN_1);
-                }
-
+                ran = Random.Range(0, elements[2].value);
+                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_2_STARS_WIN + ran.ToString());
                 break;
 
             case 3:
-                ran = Random.Range(0, 2);
-
-                if (ran == 0)
-                {
-                    _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_3_STARS_WIN);
-                }
-                else if (ran == 1)
-                {
-                    _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_3_STARS_1_WIN);
-                }
+                ran = Random.Range(0, elements[3].value);
+                _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_3_STARS_WIN + ran.ToString());
                 break;
         }
     }

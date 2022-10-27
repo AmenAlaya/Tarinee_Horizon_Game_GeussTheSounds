@@ -59,6 +59,7 @@ public class Game_Over_2_DataBase_Manager : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
         Dictionary<string, object> userData = JsonConvert.DeserializeObject<Dictionary<string, object>>(child[childKey].ToString());
 #else
+        Debug.Log(childKey);
         Dictionary<string, object> userData = (Dictionary<string, object>)child[childKey];
 #endif
         UserData data = new UserData();

@@ -21,7 +21,7 @@ public class Game_Over_2_Ferid : MonoBehaviour
     private float clipLoudness;
     private float currentUpdateTime;
 
-    private const float EPSILON = 0.0001f;
+    private const float EPSILON = 0.001f;
 
     private void Awake()
     {
@@ -83,11 +83,11 @@ public class Game_Over_2_Ferid : MonoBehaviour
 
                 if (clipLoudness > EPSILON)
                 {
-                    myAnim.SetLayerWeight(1, Mathf.Lerp(myAnim.GetLayerWeight(1), 1, 200 * Time.deltaTime));
+                    myAnim.SetLayerWeight(1, 1);
                 }
                 else
                 {
-                    myAnim.SetLayerWeight(1, Mathf.Lerp(myAnim.GetLayerWeight(1), 0, 200 * Time.deltaTime));
+                    myAnim.SetLayerWeight(1,0);
                 }
             }
             catch (Exception e)

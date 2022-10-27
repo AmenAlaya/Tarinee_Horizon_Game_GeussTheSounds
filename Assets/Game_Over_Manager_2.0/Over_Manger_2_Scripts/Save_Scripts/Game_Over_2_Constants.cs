@@ -1,7 +1,11 @@
-﻿public class Game_Over_2_Constants
+﻿using UnityEngine.UI;
+
+public class Game_Over_2_Constants
 {
     //Game Bihiavior
     public static string GAME_REFRENCE = "gameReference";
+
+    public static string GAME_REFRENCE_KEY = "gameReference";
 
     //DataBase Nodes
 
@@ -57,11 +61,10 @@
     public static void Set_Language(Language lan)
     {
         string langange = "[" + lan.ToString() + "]";
-        INFINITE_MODE += langange;
-        MAP += langange;
-        MAIN_MENU += langange;
-        LEVEL += langange;
-        LEVEL_UP += langange;
+        INFINITE_MODE = "_3_Infinte_Mode" + langange;
+        MAP = "_1_Map" + langange;
+        MAIN_MENU = "_0_MainMenu" + langange;
+        LEVEL = "_2_Level" + langange;
     }
 
     //Main App Keys
@@ -81,10 +84,10 @@
 
     //Ferid Talks
 
-    public static string FERID_TALKS_HELLO = "Ferid_Talks_Hello_0";
-    public static string FERID_TALKS_HELLO_1 = "Ferid_Talks_Hello_1";
-    public static string FERID_TALKS_HELLO_2 = "Ferid_Talks_Hello_2";
-    public static string FERID_TALKS_HELLO_3 = "Ferid_Talks_Hello_3";
+    public static string FERID_TALKS_BEST_SCORE = "FERID_TALKS_HELLO_BEST_SCORE_";
+    public static string FERID_TALKS_SCORE = "FERID_TALKS_HELLO_SCORE_";
+
+    public static string FERID_TALKS_HELLO = "FERID_TALKS_HELLO_";
 
     public static string FERID_TALKS_IDLE_FINISH_LEVELS = "You can challenge your friends after completing all the levels";
     public static string FERID_TALKS_IDLE_FINISH_LEVELS_2 = "You can now challenge your friends with the infinite mode";
@@ -92,38 +95,32 @@
 
     public static string FERID_TALKS_AVATR = "you can follow your experience level through Ferid’s button";
     public static string FERID_TALKS_LEADER_BOARD = "You can follow your ranking with Ferid’s button";
-    public static string FERID_TALKS_EXIT_BACK_HOME = "To go back to ferid's world press the settings button";
-    public static string FERID_TALKS_TUTORIAL = "Let's learn how to play the game";
-    public static string FERID_TALKS_LETS_PLAY = "let's discover this level";
-    public static string FERID_TALKS_LETS_PLAY_1 = "let's try to solve this level";
-    public static string FERID_TALKS_LETS_PLAY_2 = "let the fun begins";
 
-    public static string FERID_TALKS_LETS_LOSE = "lets try again";
-    public static string FERID_TALKS_LETS_LOSE_1 = "Oh oh let's try again";
-    public static string FERID_TALKS_LETS_LOSE_2 = "Don’t give up! We can do it";
+    public static string FERID_TALKS_TUTORIAL = "FERID_TALKS_TUTORIAL_";
+    public static string FERID_TALKS_LETS_PLAY = "FERID_TALKS_LETS_PLAY_";
 
-    public static string FERID_TALKS_3_STARS_WIN = "perfect";
-    public static string FERID_TALKS_3_STARS_1_WIN = "Keep going";
+    public static string FERID_TALKS_LETS_LOSE = "FERID_TALKS_LETS_LOSE_";
 
-    public static string FERID_TALKS_2_STARS_WIN = "Good Job";
-    public static string FERID_TALKS_2_STARS_WIN_1 = "Very good";
+    public static string FERID_TALKS_3_STARS_WIN = "FERID_TALKS_3_STARS_WIN_";
 
-    public static string FERID_TALKS_1_STARS_WIN = "nice but we can do better";
+    public static string FERID_TALKS_2_STARS_WIN = "FERID_TALKS_2_STARS_WIN_";
 
-    public static string FERID_TALKS_PAUSE = "1,2,3 lets gooo";
+    public static string FERID_TALKS_1_STARS_WIN = "FERID_TALKS_1_STARS_WIN_";
 
-    public static string FERID_TALKS_INFINITE_SCORE = "GREAT You get a new high score";
+    public static string FERID_TALKS_PAUSE = "1,2,3LET_GO";
+
+    public static string FERID_TALKS_YOU_UNLOCKINFINITE_INFINITE_MODE = "Unlocked_all_The_Levels";
 
     //Ferid Animation
 
     //Keys
 
-    public static string GAME_DATA_STARS = GAME_REFRENCE + COOL_SEPERATOR + DB_STARS;
-    public static string GAME_DATA_EXPIRIENCE = "Fuck";
-    public static string GAME_DATA_USER_FULL_NAME = "this";
-    public static string GAME_DATA_UPPER_ACCESSORIE = "Shit";
-    public static string GAME_DATA_LOWER_ACCESSORIE = "hell";
-    public static string GAME_DATA_BESTSCORE = "I";
+    public static string GAME_DATA_STARS = "";
+    public static string GAME_DATA_EXPIRIENCE = "berry";
+    public static string GAME_DATA_USER_FULL_NAME = "tub";
+    public static string GAME_DATA_UPPER_ACCESSORIE = "mina";
+    public static string GAME_DATA_LOWER_ACCESSORIE = "al";
+    public static string GAME_DATA_BESTSCORE = "forn";
     public static string GAME_DATA_TOTAL_STARS = "am";
     public static string GAME_DATA_USER_ID = "Out";
     public static string GAME_DATA_USER = "!";
@@ -140,6 +137,7 @@
         GAME_DATA_LOWER_ACCESSORIE = m_userData.gameRef + COOL_SEPERATOR + m_userData.uId + COOL_SEPERATOR + m_userData.child + COOL_SEPERATOR + DOWN_ACCESSORIE;
         GAME_DATA_BESTSCORE = m_userData.gameRef + COOL_SEPERATOR + m_userData.uId + COOL_SEPERATOR + m_userData.child + COOL_SEPERATOR + DB_BEST_SCORE;
         GAME_DATA_TOTAL_STARS = m_userData.gameRef + COOL_SEPERATOR + m_userData.uId + COOL_SEPERATOR + m_userData.child + COOL_SEPERATOR + DB_STARS;
+        GAME_DATA_PLAYER_LEVEL = m_userData.gameRef + COOL_SEPERATOR + m_userData.uId + COOL_SEPERATOR + m_userData.child + COOL_SEPERATOR + PLAYER_LEVEL;
     }
 
     // Internet down problem
@@ -150,4 +148,9 @@
 
     //WEC
     public static string WEC_USERS = "WEC_Users";
+
+    //Sound State
+    public static string SFX_STATE = "Sfx_State";
+
+    public static string MUSIC_STATE = "Music_State";
 }

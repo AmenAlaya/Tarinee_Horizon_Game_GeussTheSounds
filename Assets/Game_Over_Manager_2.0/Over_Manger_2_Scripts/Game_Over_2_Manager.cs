@@ -45,6 +45,9 @@ public class Game_Over_2_Manager : MonoBehaviour
 
     private void Start()
     {
+        Get_User();
+        Game_Over_2_Constants.GAME_REFRENCE = userData.gameRef;
+
         Game_Over_2_Constants.Set_Language(_language);
     }
 
@@ -116,6 +119,7 @@ public class Game_Over_2_Manager : MonoBehaviour
 
     public void Update_LeaderBoard_Value_FB(string item, object value)
     {
+        Debug.Log("Key Updated " + Game_Over_2_Constants.DB_LEADERBOARD + "/" + userData.gameRef + "/" + userData.uId + "/" + userData.child + "/" + item + " : " + value.ToString());
         Game_Over_2_FB_Interactions.Set_Item(Game_Over_2_Constants.DB_LEADERBOARD + "/" + userData.gameRef + "/" + userData.uId + "/" + userData.child + "/" + item, value);
     }
 }

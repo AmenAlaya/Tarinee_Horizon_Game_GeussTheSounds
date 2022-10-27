@@ -97,8 +97,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2555087604524351995}
+  - component: {fileID: 2555087604524351972}
   - component: {fileID: 147683376}
-  - component: {fileID: 3691010409885562069}
   m_Layer: 0
   m_Name: WebGL
   m_TagString: Untagged
@@ -121,6 +121,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2555087604524351972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555087604524351973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4942938660baa1f4187566c91dc089ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fetchBehavior: {fileID: 147683376}
+  _fetchPanel: {fileID: 7299400907543209633}
+  _text: {fileID: 1980035140922714190}
 --- !u!114 &147683376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,22 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7c759fa78464449b57f002fabfdc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _webFetchBehavior: {fileID: 3691010409885562069}
---- !u!114 &3691010409885562069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2555087604524351973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d53ff2a30f1cf034d8befdcdedbd05ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fetchBehavior: {fileID: 147683376}
-  _fetchPanel: {fileID: 7299400907543209633}
-  _text: {fileID: 1980035140922714190}
+  _webFetchBehavior: {fileID: 2555087604524351972}
 --- !u!1 &3957296491442375123
 GameObject:
   m_ObjectHideFlags: 0

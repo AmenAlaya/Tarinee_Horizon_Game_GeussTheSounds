@@ -11,7 +11,8 @@ public class Ferid_Speach
 
 public class Game_Over_2_Ferid_Talks : MonoBehaviour
 {
-    [SerializeField] private List<string> _listOfHello = new List<string>();
+    [SerializeField]
+    private int index = 11;
 
     [SerializeField] private Animator _anim;
 
@@ -43,29 +44,18 @@ public class Game_Over_2_Ferid_Talks : MonoBehaviour
     private IEnumerator Say_Hi()
     {
         yield return new WaitForSeconds(1.5f);
-        int ran = Random.Range(0, _listOfHello.Count);
-        _audioManager.Ferid_Talking(_listOfHello[ran]);
+        int ran = Random.Range(0, index);
+        _audioManager.Ferid_Talking(Game_Over_2_Constants.FERID_TALKS_HELLO + ran.ToString());
     }
 
     private void Update()
     {
-        _currentTime += Time.deltaTime;
-        if (_currentTime > _timeOfFeridToTalk)
-        {
-            if (_indexOfTalkType == 0)
-            {
-                int ran = Random.Range(0, _feridIdleTalksLists.listOfFact.Count);
-                if (!Game_Over_2_OptionPanel.sfxMuted)
-                    ferid.Talk(_feridIdleTalksLists.listOfFact[ran]);
-                _indexOfTalkType++;
-            }
-            else if (_indexOfTalkType == 1)
-            {
-                _indexOfTalkType = 0;
-                int ran = Random.Range(0, _feridIdleTalksLists.listOfinformation.Count);
-                _audioManager.Ferid_Talking(_feridIdleTalksLists.listOfinformation[ran]);
-            }
-            _currentTime = 0;
-        }
+        //_currentTime += Time.deltaTime;
+        //if (_currentTime > _timeOfFeridToTalk)
+        //{
+        //    int ran = Random.Range(0, _feridIdleTalksLists.listOfinformation.Count);
+        //    _audioManager.Ferid_Talking(_feridIdleTalksLists.listOfinformation[ran]);
+        //    _currentTime = 0;
+        //}
     }
 }

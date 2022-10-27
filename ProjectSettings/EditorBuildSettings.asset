@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MyScenes/Dlc_0_StartUpScene[AR].unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/MyScenes/Dlc_1_Map[AR].unity
     guid: 49635029e0874b440a07ffb4e98d81fd
   - enabled: 1
@@ -16,20 +13,23 @@ EditorBuildSettings:
     guid: 066ebd8b47888fd489847442c25631df
   - enabled: 1
     path: Assets/MyScenes/Dlc_2_Level[AR] 1.unity
-    guid: c87279ee35137d148ba1b4c1e1b56bb4
+    guid: 5601c3c3bb1d44440a3da5d78d945c34
   - enabled: 1
     path: Assets/MyScenes/Dlc_2_Level[AR] 2.unity
-    guid: 7691a3129b7c0484e9a9f8a55718bc25
+    guid: a909f50639ed7384bb3eadbdfc9250b7
   - enabled: 1
     path: Assets/MyScenes/Dlc_2_Level[AR] 3.unity
-    guid: 7064bdc6e7a3e42449eb6dd5f8811d58
+    guid: c5aad3cac54dbaf429ce15b6393d4970
   - enabled: 1
     path: Assets/MyScenes/Dlc_2_Level[AR] 4.unity
-    guid: 29e92bbc3e523de439f4d5e26486e146
+    guid: fe04253ef49ddbf4a94a3e71553e7131
   - enabled: 1
     path: Assets/MyScenes/Dlc_2_Level[AR] 5.unity
-    guid: 1c041c1c66bcb5443b7ab72d1224a649
+    guid: d2a267c7671a26c45bb0304ebb804f01
   - enabled: 1
     path: Assets/MyScenes/Dlc_3_Infinte_Mode[AR].unity
-    guid: fe7e2ef7c53782543a6cb624681184e9
+    guid: bfb96ddf8fbee3a45b43d53ad179daec
+  - enabled: 1
+    path: Assets/MyScenes/Dlc_0_StartUpScene[AR].unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

@@ -54,7 +54,7 @@ public class Game_Over_2_SaveSystem
 
     public static void Set_User_Data(UserData userData)
     {
-        PlayerPrefs.SetString(Game_Over_2_Constants.GAME_REFRENCE, userData.gameRef);
+        PlayerPrefs.SetString(Game_Over_2_Constants.GAME_REFRENCE_KEY, userData.gameRef);
         PlayerPrefs.SetString(Game_Over_2_Constants.GAME_DATA_USER_ID, userData.uId);
         PlayerPrefs.SetString(Game_Over_2_Constants.GAME_DATA_USER, userData.child);
         PlayerPrefs.SetString(Game_Over_2_Constants.GAME_DATA_USER_FULL_NAME, userData.name + " " + userData.surName);
@@ -69,7 +69,7 @@ public class Game_Over_2_SaveSystem
     {
         UserData userData = new UserData();
 
-        userData.gameRef = PlayerPrefs.GetString(Game_Over_2_Constants.GAME_REFRENCE);
+        userData.gameRef = PlayerPrefs.GetString(Game_Over_2_Constants.GAME_REFRENCE_KEY);
         userData.uId = PlayerPrefs.GetString(Game_Over_2_Constants.GAME_DATA_USER_ID);
         userData.child = PlayerPrefs.GetString(Game_Over_2_Constants.GAME_DATA_USER);
         userData.name = PlayerPrefs.GetString(Game_Over_2_Constants.GAME_DATA_USER_FULL_NAME);

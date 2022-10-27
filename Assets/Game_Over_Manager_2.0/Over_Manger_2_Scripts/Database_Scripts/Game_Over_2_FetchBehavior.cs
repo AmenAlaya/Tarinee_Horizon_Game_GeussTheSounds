@@ -72,7 +72,9 @@ public class Game_Over_2_FetchBehavior : MonoBehaviour
     public void Set_Me_Up(string gameRef, string userID, string childID, string name, string surName, int avatarUpperAccessories, int avatarLowerAccessories)
     {
         _myUserData = new UserData(gameRef, userID, childID, name, surName, avatarUpperAccessories, avatarLowerAccessories);
+        Debug.Log("Game Ref: " + _myUserData.gameRef + "Uid: " + _myUserData.uId);
         StartCoroutine(Check_If_User_ID_Exists(_myUserData.uId));
+        Game_Over_2_Constants.SET_KEYS(_myUserData);
         _startFetching = true;
     }
 
@@ -82,7 +84,6 @@ public class Game_Over_2_FetchBehavior : MonoBehaviour
         {
             Existance_Behavior();
         }
-
     }
 
     private void Existance_Behavior()
@@ -112,7 +113,6 @@ public class Game_Over_2_FetchBehavior : MonoBehaviour
         if (_isUserFetched)
         {
             _isUserFetched = false;
-            Game_Over_2_Constants.SET_KEYS(_myUserData);
             Game_Over_2_SaveSystem.Set_User_Data(_myUserData);
 #if UNITY_WEBGL
             _webFetchBehavior.Fetch_Panel(false);
@@ -128,9 +128,38 @@ public class Game_Over_2_FetchBehavior : MonoBehaviour
 
     private void Load_User_Data(UserData userData)
     {
-        userData.bestScore = int.Parse(_dbUserData[Game_Over_2_Constants.DB_BEST_SCORE].ToString());
-        userData.stars = _dbUserData[Game_Over_2_Constants.DB_STARS].ToString();
-        userData.exp = int.Parse(_dbUserData[Game_Over_2_Constants.DB_XP].ToString());
+        Debug.Log("fhzeihfuiz");
+        Debug.Log(PlayerPrefs.GetInt("Key! " + Game_Over_2_Constants.GAME_DATA_BESTSCORE + " " + _dbUserData[Game_Over_2_Constants.DB_BEST_SCORE].ToString()));
+
+        userData.bestScore = Check_User_Stats(PlayerPrefs.GetInt(Game_Over_2_Constants.GAME_DATA_BESTSCORE), int.Parse(_dbUserData[Game_Over_2_Constants.DB_BEST_SCORE].ToString()));
+        userData.stars = Check_User_Stats(Game_Over_2_Constants.GAME_DATA_TOTAL_STARS);
+        userData.exp = Check_User_Stats(PlayerPrefs.GetInt(Game_Over_2_Constants.GAME_DATA_EXPIRIENCE), int.Parse(_dbUserData[Game_Over_2_Constants.DB_XP].ToString()));
+
+        StartCoroutine(Update_Player_Elements(userData.bestScore, userData.exp, userData.stars));
+    }
+
+    private int Check_User_Stats(int curentStats, int dbStats)
+    {
+        if (curentStats > dbStats)
+        {
+            return curentStats;
+        }
+        else
+        {
+            return dbStats;
+        }
+    }
+
+    private string Check_User_Stats(string key)
+    {
+        if (PlayerPrefs.HasKey(key))
+        {
+            return PlayerPrefs.GetString(key);
+        }
+        else
+        {
+            return _dbUserData[Game_Over_2_Constants.DB_STARS].ToString();
+        }
     }
 
     public IEnumerator Check_If_User_ID_Exists(string uId)
@@ -141,6 +170,17 @@ public class Game_Over_2_FetchBehavior : MonoBehaviour
         yield return cd.coroutine;
 
         //Here you can add a close of loading animation
+
+#if UNITY_WEBGL
+        if (cd.result.ToString() != "null")
+        {
+            _userIdExists = true;
+        }
+        else
+        {
+            _userDoesNotExists = true;
+        }
+#else
         if (cd.result != null)
         {
             _userIdExists = true;
@@ -149,15 +189,27 @@ public class Game_Over_2_FetchBehavior : MonoBehaviour
         {
             _userDoesNotExists = true;
         }
+#endif
     }
 
-    public IEnumerator Check_If_Child_Exists(string user)
+     public IEnumerator Check_If_Child_Exists(string user)
     {
         //Here you can add a loading animation
         Game_Over_2_CoroutineWithData cd = new Game_Over_2_CoroutineWithData(this, Game_Over_2_FB_Interactions.Get_Data(Game_Over_2_Constants.DB_LEADERBOARD + "/" + _myUserData.gameRef + "/" + _myUserData.uId + "/" + user));
         yield return cd.coroutine;
 
+#if UNITY_WEBGL
         //Here you can add a close of loading animation
+        if (cd.result.ToString() != "null")
+        {
+            _dbUserData = (Dictionary<string, object>)cd.result;
+            _userExists = true;
+        }
+        else
+        {
+            _userDoesNotExists = true;
+        }
+#else
         if (cd.result != null)
         {
             _dbUserData = (Dictionary<string, object>)cd.result;
@@ -167,6 +219,7 @@ public class Game_Over_2_FetchBehavior : MonoBehaviour
         {
             _userDoesNotExists = true;
         }
+#endif
     }
 
     private IEnumerator Update_Player_Elements(int bestScore, int exp, string stars)

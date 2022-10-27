@@ -65,13 +65,10 @@ public class Game_Over_2_LevelManager : MonoBehaviour
             Game_Over_2_GameInteraction.isLevelUp = false;
             StartCoroutine(LevelUp_Behavior());
         }
-        
-
     }
 
     private IEnumerator LevelUp_Behavior()
     {
-
         yield return new WaitForSeconds(.5f);
         _LevelUpPanel.SetActive(true);
         _expLevelTxt.text = PlayerPrefs.GetInt(Game_Over_2_Constants.GAME_DATA_PLAYER_LEVEL).ToString();
@@ -129,11 +126,11 @@ public class Game_Over_2_LevelManager : MonoBehaviour
             indexLevelReached++;
         }
 
-        _levelReached = splitedList.Length + 1;
+        _levelReached = splitedList.Length;
 
-        if (_levelReached >= _manager.numberOfLevel)
+        if (_levelReached > _manager.numberOfLevel)
         {
-            Game_Over_2_SaveSystem.Final_Level_Reached(_levelReached);
+            Game_Over_2_SaveSystem.Final_Level_Reached(_levelReached + 1);
         }
     }
 }

@@ -118,6 +118,7 @@ public class Game_Over_2_UIManager : MonoBehaviour
             }
 
             Destroy(_audioManager.gameObject);
+            Destroy(Game_Over_2_Manager.instance.gameObject);
         }
     }
 

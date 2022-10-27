@@ -66,12 +66,12 @@ public class Game_Over_2_User_Info : MonoBehaviour
 
     public int Get_Current_Expirience_Values()
     {
-        return _manager.Current_Exp_Value(_myData.exp);
+        return Game_Over_2_Manager.instance.Current_Exp_Value(_myData.exp);
     }
 
     public int Get_Max_Expirience_Values()
     {
-        return _manager.Max_Exp_Value();
+        return Game_Over_2_Manager.instance.Max_Exp_Value();
     }
 
     public int Get_Player_Level()
